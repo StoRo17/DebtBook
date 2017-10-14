@@ -12,7 +12,9 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'sign_in' => 'Sign In',
+    'sign_up' => 'Sing Up',
+    'logout' => 'Logout',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

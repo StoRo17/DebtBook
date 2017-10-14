@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
 
         /*
          * Application Service Providers...

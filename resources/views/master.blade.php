@@ -9,12 +9,14 @@
     <title>DebtBook</title>
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
 </head>
 <body>
-    <div id="app">
-        <side-nav></side-nav>
-    </div>
+    @if (!auth()->check())
+        @include('app')
+    @else
+        @include('startPage')
+    @endif
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script src="js/app.js"></script>
