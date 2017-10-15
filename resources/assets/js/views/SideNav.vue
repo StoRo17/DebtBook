@@ -1,23 +1,18 @@
 <template>
-
+    <div>
+        <li><user-info name="John" email="johndoe@gmail.com" avatar="storage/avatars/no_image.jpg"></user-info></li>
+        <li><router-link to="/debts-history" class="waves-effect"><i class="material-icons">book</i>История долгов</router-link></li>
+        <li><div class="divider"></div></li>
+        <li><sign-button link-to="/logout" caption="auth.logout"></sign-button></li>
+    </div>
 </template>
 
-<style>
-    header, main, footer {
-        padding-left: 300px;
-    }
+<script>
+    import UserInfo from '../components/UserInfo.vue';
 
-    @media only screen and (max-width : 992px) {
-        header, main, footer {
-            padding-left: 0;
+    export default {
+        components: {
+            'user-info': UserInfo
         }
     }
-
-    nav .button-collapse {
-        margin: 0;
-    }
-</style>
-
-<script>
-
 </script>
