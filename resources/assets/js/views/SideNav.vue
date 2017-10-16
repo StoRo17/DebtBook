@@ -1,6 +1,13 @@
 <template>
     <div>
-        <li><user-info name="John" email="johndoe@gmail.com" avatar="storage/avatars/no_image.jpg"></user-info></li>
+        <li>
+            <div class="user-view">
+                <div class="background green"></div>
+                <router-link to="/" exact><img class="circle responsive-img" src="storage/avatars/no_image.jpg"></router-link>
+                <router-link to="/" exact><span class="white-text name">John Doe</span></router-link>
+                <router-link to="/" exact><span class="white-text email">johndoe@gmail.com</span></router-link>
+            </div>
+        </li>
         <li><router-link to="/debts-history" class="waves-effect"><i class="material-icons">book</i>История долгов</router-link></li>
         <li><div class="divider"></div></li>
         <li><sign-button link-to="/logout" caption="auth.logout"></sign-button></li>
@@ -8,11 +15,7 @@
 </template>
 
 <script>
-    import UserInfo from '../components/UserInfo.vue';
-
     export default {
-        components: {
-            'user-info': UserInfo
-        }
+
     }
 </script>

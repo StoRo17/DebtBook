@@ -3561,9 +3561,9 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(45)
+var __vue_script__ = __webpack_require__(48)
 /* template */
-var __vue_template__ = __webpack_require__(46)
+var __vue_template__ = __webpack_require__(49)
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
@@ -15680,7 +15680,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(43)
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = __webpack_require__(47)
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
@@ -15723,8 +15723,13 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UserInfo_vue__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_UserInfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_UserInfo_vue__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15735,16 +15740,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        'user-info': __WEBPACK_IMPORTED_MODULE_0__components_UserInfo_vue___default.a
-    }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 44 */
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -15752,19 +15754,33 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "li",
-      [
-        _c("user-info", {
-          attrs: {
-            name: "John",
-            email: "johndoe@gmail.com",
-            avatar: "storage/avatars/no_image.jpg"
-          }
-        })
-      ],
-      1
-    ),
+    _c("li", [
+      _c(
+        "div",
+        { staticClass: "user-view" },
+        [
+          _c("div", { staticClass: "background green" }),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: "/", exact: "" } }, [
+            _c("img", {
+              staticClass: "circle responsive-img",
+              attrs: { src: "storage/avatars/no_image.jpg" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: "/", exact: "" } }, [
+            _c("span", { staticClass: "white-text name" }, [_vm._v("John Doe")])
+          ]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: "/", exact: "" } }, [
+            _c("span", { staticClass: "white-text email" }, [
+              _vm._v("johndoe@gmail.com")
+            ])
+          ])
+        ],
+        1
+      )
+    ]),
     _vm._v(" "),
     _c(
       "li",
@@ -15812,7 +15828,7 @@ if (false) {
 }
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15827,7 +15843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -15847,118 +15863,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-0bc2ce5f", module.exports)
-  }
-}
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(48)
-/* template */
-var __vue_template__ = __webpack_require__(49)
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/UserInfo.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] UserInfo.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-17246f29", Component.options)
-  } else {
-    hotAPI.reload("data-v-17246f29", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['name', 'email', 'avatar']
-});
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "user-view" },
-    [
-      _c("div", { staticClass: "background green" }),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/", exact: "" } }, [
-        _c("img", {
-          staticClass: "circle responsive-img",
-          attrs: { src: _vm.avatar }
-        })
-      ]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/", exact: "" } }, [
-        _c("span", { staticClass: "white-text name" }, [
-          _vm._v(_vm._s(_vm.name))
-        ])
-      ]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/", exact: "" } }, [
-        _c("span", { staticClass: "white-text email" }, [
-          _vm._v(_vm._s(_vm.email))
-        ])
-      ])
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-17246f29", module.exports)
   }
 }
 

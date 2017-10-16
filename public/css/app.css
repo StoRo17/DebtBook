@@ -1,13 +1,21 @@
-header, main, footer {
-    padding-left: 300px;
+body {
+    background-color: #eeeeee;
 }
 
-@media only screen and (max-width : 992px) {
-    header, main, footer {
-        padding-left: 0;
-    }
+.row .center a {
+    width: 100%;
 }
 
-nav .button-collapse {
-    margin: 0;
+#add-debt-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#nav-mobile a {
+    height: 64px;
+}
+
+#nav-mobile img {
+    height: 60px;
+    margin-top: 2px;
 }
