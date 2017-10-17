@@ -1,5 +1,5 @@
 import './bootstrap';
-import router from './routes';
+import router from './startPageRoutes';
 import Header from './views/Header.vue';
 import SignButton from './components/SignButton.vue';
 
