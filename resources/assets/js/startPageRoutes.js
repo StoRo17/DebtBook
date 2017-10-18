@@ -1,11 +1,11 @@
 import VueRouter from 'vue-router';
-import StartPage from './views/StartView.vue';
+import StartView from './views/StartView.vue';
 
 let routes = [
     {
         path: '/',
-        name: 'startPage',
-        component: StartPage
+        name: 'startView',
+        component: StartView
     }
 ];
 
