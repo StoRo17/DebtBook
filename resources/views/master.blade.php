@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-    @if (!auth()->check())
+    @if (auth()->check())
         @include('app')
     @else
         @include('startPage')
