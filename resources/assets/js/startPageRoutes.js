@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import StartPage from './views/StartPage.vue';
+import StartPage from './views/StartView.vue';
 
 let routes = [
     {
