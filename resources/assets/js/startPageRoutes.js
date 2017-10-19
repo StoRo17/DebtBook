@@ -4,22 +4,31 @@ import RegisterView from './views/RegisterView.vue';
 import LoginView from './views/LoginView.vue';
 
 
-let routes = [
+const withPrefix = (prefix, routes) =>
+    routes.map( (route) => {
+        route.path = prefix + route.path;
+        return route;
+    });
+
+
+const routes = [
     {
         path: '/',
         name: 'startView',
         component: StartView
     },
-    {
-        path: '/auth/register',
-        name: 'register',
-        component: RegisterView
-    },
-    {
-        path: '/auth/login',
-        name: 'auth',
-        component: LoginView
-    }
+    ...withPrefix('/auth', [
+        {
+            path: '/register',
+            name: 'register',
+            component: RegisterView
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: LoginView
+        }
+    ])
 ];
 
 export default new VueRouter({

@@ -9,8 +9,8 @@
     <title>DebtBook</title>
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
-    <link rel="stylesheet" href="css/app.css">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}" media="screen,projection">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     @if (auth()->check())
@@ -19,7 +19,7 @@
         @include('startPage')
     @endif
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script src="js/app.js"></script>
+    <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
