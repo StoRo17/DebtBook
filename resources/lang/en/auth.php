@@ -15,6 +15,8 @@ return [
     'sign_in' => 'Sign In',
     'sign_up' => 'Sing Up',
     'logout' => 'Logout',
+    'password' => 'Password',
+    'submit' => 'Submit',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
