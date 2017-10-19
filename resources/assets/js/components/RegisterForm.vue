@@ -16,6 +16,12 @@
                     <label for="password">{{ 'auth.password' | trans }}</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password_confirmation" type="password" class="validate" v-model="passwordConfirmation">
+                    <label for="password_confirmation">{{ 'auth.password_confirmation' | trans }}</label>
+                </div>
+            </div>
             <div class="row center-align">
                 <button class="btn waves-effect waves-light" name="action">{{ 'auth.submit' | trans }}
                     <i class="material-icons right">send</i>
@@ -30,7 +36,8 @@
         data() {
             return {
                 email: '',
-                password: ''
+                password: '',
+                passwordConfirmation: '',
             }
         }
     }
