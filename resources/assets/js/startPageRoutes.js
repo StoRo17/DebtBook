@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
 import StartView from './views/StartView.vue';
-import RegisterView from './views/RegisterView.vue';
-import LoginView from './views/LoginView.vue';
+import RegisterForm from './components/RegisterForm.vue';
+import LoginForm from './components/LoginForm.vue';
 
 
 const withPrefix = (prefix, routes) =>
@@ -21,12 +21,12 @@ const routes = [
         {
             path: '/register',
             name: 'register',
-            component: RegisterView
+            component: RegisterForm
         },
         {
             path: '/login',
             name: 'login',
-            component: LoginView
+            component: LoginForm
         }
     ])
 ];
