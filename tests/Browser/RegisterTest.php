@@ -30,7 +30,8 @@ class RegisterTest extends DuskTestCase
                 ->type('password_confirmation', 'secret')
                 ->press('submit')
                 ->waitForLocation('/verification')
-                ->assertPathIs('/verification');
+                ->assertPathIs('/verification')
+                ->assertSee(Lang::get('auth.verification_message'));
         });
 
         $this->assertDatabaseHas('users', [
