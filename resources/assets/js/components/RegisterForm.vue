@@ -5,20 +5,23 @@
                 <h2 class="center-align">{{ 'auth.sign_up' | trans }}</h2>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" type="email" name="email" v-model="email">
+                        <input id="email" type="email" name="email" v-model="form.email">
                         <label for="email">Email</label>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="password" type="password" name="password" v-model="password">
+                    <input id="password" type="password" name="password" v-model="form.password">
                     <label for="password">{{ 'auth.password' | trans }}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="password_confirmation" type="password" name="password_confirmation" v-model="passwordConfirmation">
+                    <input id="password_confirmation"
+                           type="password"
+                           name="password_confirmation"
+                           v-model="form.passwordConfirmation">
                     <label for="password_confirmation">{{ 'auth.password_confirmation' | trans }}</label>
                 </div>
             </div>
@@ -32,12 +35,16 @@
 </template>
 
 <script>
+    import Form from '../Form';
+
     export default {
         data() {
             return {
-                email: '',
-                password: '',
-                passwordConfirmation: '',
+                form: new Form({
+                    email: '',
+                    password: '',
+                    passwordConfirmation: ''
+                })
             }
         },
 
