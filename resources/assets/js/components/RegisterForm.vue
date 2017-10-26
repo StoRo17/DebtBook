@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form method="POST">
+        <form method="POST" @submit.prevent="onSubmit">
             <div class="col s12">
                 <h2 class="center-align">{{ 'auth.sign_up' | trans }}</h2>
                 <div class="row">
@@ -38,6 +38,22 @@
                 email: '',
                 password: '',
                 passwordConfirmation: '',
+            }
+        },
+
+        methods: {
+            onSubmit() {
+                axios.post('/auth/register', {
+                    email: this.email,
+                    password: this.password,
+                    password_confirmation: this.passwordConfirmation
+                })
+                    .then(function (response) {
+                        console.log(response.data)
+                    })
+                    .catch(function(error) {
+                        console.log(error.response.data);
+                    });
             }
         }
     }

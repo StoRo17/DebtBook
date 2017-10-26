@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('master');
 });
 
+Route::post('auth/register', 'Auth\RegisterController@register');
+
 Route::get('/{vue?}', function () { return view('master'); })->where('vue', '[\/\w\.-]*');
