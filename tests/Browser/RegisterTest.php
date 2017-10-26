@@ -16,7 +16,7 @@ class RegisterTest extends DuskTestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testRegisterForm()
     {
         $this->browse(function (Browser $browser) {
             $signUpText = Lang::get('auth.sign_up');
