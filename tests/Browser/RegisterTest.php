@@ -12,7 +12,7 @@ class RegisterTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * A Dusk test example.
+     * Test register form.
      *
      * @return void
      */
