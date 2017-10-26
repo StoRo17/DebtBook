@@ -12,23 +12,30 @@ class RegisterTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * Test register form.
+     * Test register form with right data.
      *
      * @return void
      */
-    public function testRegisterForm()
+    public function testRegisterFormWithRightData()
     {
-        $this->browse(function (Browser $browser) {
+        $email = 'johndoe@gmail.com';
+        $this->browse(function (Browser $browser) use ($email) {
             $signUpText = Lang::get('auth.sign_up');
+
             $browser->visit('/')
                     ->clickLink($signUpText)
                     ->waitForText($signUpText)
-                    ->type('email', 'johndoe@gmail.com')
+                    ->type('email', $email)
                     ->type('password', 'secret')
                     ->type('password_confirmation', 'secret')
                     ->press('submit')
                     ->waitForLocation('/verification')
                     ->assertPathIs('/verification');
         });
+
+        $this->assertDatabaseHas('users', [
+            'email' => $email,
+            'email_token' => base64_encode($email),
+        ]);
     }
 }
