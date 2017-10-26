@@ -23,19 +23,29 @@ class RegisterTest extends DuskTestCase
             $signUpText = Lang::get('auth.sign_up');
 
             $browser->visit('/')
-                    ->clickLink($signUpText)
-                    ->waitForText($signUpText)
-                    ->type('email', $email)
-                    ->type('password', 'secret')
-                    ->type('password_confirmation', 'secret')
-                    ->press('submit')
-                    ->waitForLocation('/verification')
-                    ->assertPathIs('/verification');
+                ->clickLink($signUpText)
+                ->waitForText($signUpText)
+                ->type('email', $email)
+                ->type('password', 'secret')
+                ->type('password_confirmation', 'secret')
+                ->press('submit')
+                ->waitForLocation('/verification')
+                ->assertPathIs('/verification');
         });
 
         $this->assertDatabaseHas('users', [
             'email' => $email,
             'email_token' => base64_encode($email),
         ]);
+    }
+
+    public function testRegisterFormWithWrongData()
+    {
+        $this->browse(function(Browser $browser) {
+            $browser->visit('/auth/register')
+                ->press('submit')
+                ->waitForText('The email field is required')
+                ->assertSee('The email field is required');
+        });
     }
 }
