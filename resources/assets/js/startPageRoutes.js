@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router';
 import StartView from './views/StartView.vue';
+import VerificationView from './views/VerificationView.vue';
 import RegisterForm from './components/RegisterForm.vue';
 import LoginForm from './components/LoginForm.vue';
 
@@ -28,7 +29,12 @@ const routes = [
             name: 'login',
             component: LoginForm
         }
-    ])
+    ]),
+    {
+        path: '/verification',
+        name: 'verification',
+        component: VerificationView
+    }
 ];
 
 export default new VueRouter({
