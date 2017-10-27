@@ -40,15 +40,25 @@ class RegisterTest extends DuskTestCase
         ]);
     }
 
-    public function testRegisterFormWithWrongData()
+    public function testRegisterFormWithEmptyData()
     {
         $this->browse(function(Browser $browser) {
-            $emailText = Lang::get('validation.required', ['attribute' => 'email']);
+            $emailError = Lang::get('validation.required', ['attribute' => 'email']);
+            $passwordError = Lang::get('validation.required', ['attribute' => 'password']);
+
             $browser->visit('/auth/register')
                 ->press('submit')
-                ->waitForText($emailText)
-                ->assertSee($emailText)
-                ->assertSee(Lang::get('validation.required', ['attribute' => 'password']));
+                ->waitFor("label[data-error]", 1);
+
+            $displayedEmailError = $browser->attribute('label[for=email]', 'data-error');
+            $displayedPasswordError = $browser->attribute('label[for=password]', 'data-error');
+            $buttonDisabledAttr = $browser->attribute('button[name=submit]', 'disabled');
+
+            $this->assertEquals('invalid', $browser->attribute('input#email', 'class'));
+            $this->assertEquals('invalid', $browser->attribute('input#password', 'class'));
+            $this->assertEquals($passwordError, $displayedPasswordError);
+            $this->assertEquals($emailError, $displayedEmailError);
+            $this->assertEquals('true', $buttonDisabledAttr);
         });
     }
 }
