@@ -70,7 +70,6 @@
                         this.$router.push({name: 'verification'});
                     })
                     .catch(error => {
-                        
                     });
             }
         }
