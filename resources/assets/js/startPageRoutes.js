@@ -1,11 +1,39 @@
 import VueRouter from 'vue-router';
-import StartPage from './views/StartPage.vue';
+import StartView from './views/StartView.vue';
+import VerificationView from './views/VerificationView.vue';
+import RegisterForm from './components/RegisterForm.vue';
+import LoginForm from './components/LoginForm.vue';
 
-let routes = [
+
+const withPrefix = (prefix, routes) =>
+    routes.map( (route) => {
+        route.path = prefix + route.path;
+        return route;
+    });
+
+
+const routes = [
     {
         path: '/',
-        name: 'startPage',
-        component: StartPage
+        name: 'startView',
+        component: StartView
+    },
+    ...withPrefix('/auth', [
+        {
+            path: '/register',
+            name: 'register',
+            component: RegisterForm
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: LoginForm
+        }
+    ]),
+    {
+        path: '/verification',
+        name: 'verification',
+        component: VerificationView
     }
 ];
 

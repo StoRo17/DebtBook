@@ -15,6 +15,10 @@ return [
     'sign_in' => 'Sign In',
     'sign_up' => 'Sing Up',
     'logout' => 'Logout',
+    'password' => 'Password',
+    'password_confirmation' => 'Password confirmation',
+    'submit' => 'Submit',
+    'verification_message' => 'A verification email has been sent to your email address',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
