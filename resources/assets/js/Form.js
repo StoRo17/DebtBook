@@ -44,9 +44,13 @@ export default class Form {
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
                 .then(response => {
+                    this.onSuccess();
+
                     resolve(response.data);
                 })
                 .catch(error => {
+                    this.onFail(error.response.data);
+
                     reject(error.response.data);
                 });
         });
@@ -58,5 +62,13 @@ export default class Form {
         }
 
         this.errors.clear();
+    }
+
+    onSuccess() {
+        this.reset();
+    }
+
+    onFail(errors) {
+        this.errors.set(errors)
     }
 }
