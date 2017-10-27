@@ -2,12 +2,14 @@ import axios from 'axios';
 
 export default class Form {
 
-    constructor (data) {
+    constructor (data, errors) {
         this.originalData = data;
 
         for (let field in data) {
             this[field] = data[field];
         }
+
+        this.errors = errors;
     }
 
     data() {

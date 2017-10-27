@@ -36,6 +36,7 @@
 
 <script>
     import Form from '../Form';
+    import Errors from '../Errors';
 
     export default {
         data() {
@@ -44,7 +45,7 @@
                     email: '',
                     password: '',
                     passwordConfirmation: ''
-                })
+                }, new Errors())
             }
         },
 
