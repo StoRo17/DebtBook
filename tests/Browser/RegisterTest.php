@@ -43,10 +43,12 @@ class RegisterTest extends DuskTestCase
     public function testRegisterFormWithWrongData()
     {
         $this->browse(function(Browser $browser) {
+            $emailText = Lang::get('validation.required', ['attribute' => 'email']);
             $browser->visit('/auth/register')
                 ->press('submit')
-                ->waitForText('The email field is required')
-                ->assertSee('The email field is required');
+                ->waitForText($emailText)
+                ->assertSee($emailText)
+                ->assertSee(Lang::get('validation.required', ['attribute' => 'password']));
         });
     }
 }
