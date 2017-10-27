@@ -66,8 +66,12 @@
         methods: {
             onSubmit() {
                 this.form.post('/auth/register')
-                    .then(response => console.log(response))
-                    .catch(error => console.log(error.errors));
+                    .then(response => {
+                        this.$router.push({name: 'verification'});
+                    })
+                    .catch(error => {
+                        
+                    });
             }
         }
     }
