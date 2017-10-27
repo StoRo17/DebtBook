@@ -1,15 +1,17 @@
 import axios from 'axios';
+import Errors from './Errors';
+
 
 export default class Form {
 
-    constructor (data, errors) {
+    constructor (data) {
         this.originalData = data;
 
         for (let field in data) {
             this[field] = data[field];
         }
 
-        this.errors = errors;
+        this.errors = new Errors();
     }
 
     data() {
@@ -48,5 +50,13 @@ export default class Form {
                     reject(error.response.data);
                 });
         });
+    }
+
+    reset() {
+        for (field in this.originalData) {
+            this[field] = '';
+        }
+
+        this.errors.clear();
     }
 }
