@@ -45,10 +45,10 @@ export default class Form {
             axios[requestType](url, this.data())
                 .then(response => {
                     this.onSuccess();
-
                     resolve(response.data);
                 })
                 .catch(error => {
+                    console.log(error);
                     this.onFail(error.response.data);
 
                     reject(error.response.data);
@@ -57,7 +57,7 @@ export default class Form {
     }
 
     reset() {
-        for (field in this.originalData) {
+        for (let field in this.originalData) {
             this[field] = '';
         }
 
@@ -69,6 +69,6 @@ export default class Form {
     }
 
     onFail(errors) {
-        this.errors.set(errors)
+        this.errors.set(errors.errors);
     }
 }

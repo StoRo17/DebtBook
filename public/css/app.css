@@ -19,3 +19,7 @@ body {
     height: 60px;
     margin-top: 2px;
 }
+
+.input-field label {
+    width: 100%;
+}
