@@ -50,7 +50,7 @@
 </template>
 
 <script>
-    import Form from '../Form';
+    import Form from '../../Form';
 
     export default {
         data() {
