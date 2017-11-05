@@ -14,7 +14,6 @@ class SendVerificationEmailJobTest extends TestCase
 
     public function testSendVerificationEmailJob()
     {
-        \Bus::fake();
         \Mail::fake();
         $user = factory(User::class)->create();
 
