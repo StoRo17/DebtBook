@@ -16,7 +16,7 @@ class RegisterTest extends DuskTestCase
      *
      * @return void
      */
-    public function testRegisterFormWithRightData()
+    public function testFormWithRightData()
     {
         $email = 'johndoe@gmail.com';
         $this->browse(function (Browser $browser) use ($email) {
@@ -33,14 +33,9 @@ class RegisterTest extends DuskTestCase
                 ->assertPathIs('/verification')
                 ->assertSee(Lang::get('auth.verification_message'));
         });
-
-        $this->assertDatabaseHas('users', [
-            'email' => $email,
-            'email_token' => base64_encode($email),
-        ]);
     }
 
-    public function testRegisterFormWithEmptyData()
+    public function testFormWithEmptyData()
     {
         $this->browse(function(Browser $browser) {
             $emailError = Lang::get('validation.required', ['attribute' => 'email']);
@@ -59,6 +54,27 @@ class RegisterTest extends DuskTestCase
             $this->assertEquals($passwordError, $displayedPasswordError);
             $this->assertEquals($emailError, $displayedEmailError);
             $this->assertEquals('true', $buttonDisabledAttr);
+        });
+    }
+
+    public function testFormWithWrongData()
+    {
+        $email = 'john@a';
+        $this->browse(function (Browser $browser) use ($email) {
+            $emailError = Lang::get('validation.email', ['attribute' => 'email']);
+            $passwordError = Lang::get('validation.confirmed', ['attribute' => 'password']);
+
+            $browser->visit('/auth/register')
+                ->type('email', $email)
+                ->type('password', '123456')
+                ->type('password_confirmation', '1234567')
+                ->press('submit')
+                ->waitFor("label[data-error]");
+
+            $displayedEmailError = $browser->attribute('label[for=email]', 'data-error');
+            $displayedPasswordError = $browser->attribute('label[for=password]', 'data-error');
+            $this->assertEquals($passwordError, $displayedPasswordError);
+            $this->assertEquals($emailError, $displayedEmailError);
         });
     }
 }
