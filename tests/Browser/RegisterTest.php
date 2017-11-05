@@ -16,7 +16,7 @@ class RegisterTest extends DuskTestCase
      *
      * @return void
      */
-    public function testRegisterFormWithRightData()
+    public function testFormWithRightData()
     {
         $email = 'johndoe@gmail.com';
         $this->browse(function (Browser $browser) use ($email) {
@@ -40,7 +40,7 @@ class RegisterTest extends DuskTestCase
         ]);
     }
 
-    public function testRegisterFormWithEmptyData()
+    public function testFormWithEmptyData()
     {
         $this->browse(function(Browser $browser) {
             $emailError = Lang::get('validation.required', ['attribute' => 'email']);
