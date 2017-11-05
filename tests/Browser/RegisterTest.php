@@ -33,11 +33,6 @@ class RegisterTest extends DuskTestCase
                 ->assertPathIs('/verification')
                 ->assertSee(Lang::get('auth.verification_message'));
         });
-
-        $this->assertDatabaseHas('users', [
-            'email' => $email,
-            'email_token' => base64_encode($email),
-        ]);
     }
 
     public function testFormWithEmptyData()
@@ -81,9 +76,5 @@ class RegisterTest extends DuskTestCase
             $this->assertEquals($passwordError, $displayedPasswordError);
             $this->assertEquals($emailError, $displayedEmailError);
         });
-
-        $this->assertDatabaseMissing('users', [
-            'email' => $email
-        ]);
     }
 }
