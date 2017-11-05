@@ -84,6 +84,16 @@ class RegisterController extends Controller
         ], 201);
     }
 
+    public function verify($token)
+    {
+        $user = User::where('email_token', $token)->first();
+        $user->verified = true;
+
+        if ($user->save()) {
+            return redirect('/email-confirmed');
+        }
+    }
+
     /**
      * Get the guard to be used during registration.
      *
