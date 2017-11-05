@@ -88,6 +88,7 @@ class RegisterController extends Controller
     {
         $user = User::where('email_token', $token)->first();
         $user->verified = true;
+        $user->email_token = null;
 
         if ($user->save()) {
             return redirect('/email-confirmed');
