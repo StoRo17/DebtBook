@@ -2,9 +2,9 @@
     <div class="input-field">
         <input :id="name"
                ref="input"
-               :type="type"
+               :type="inputType"
                :name="name"
-               :class="inputClasses"
+               :class="classes"
                :value="value"
                @input="updateText($event.target.value)">
         <label :for="name" :data-error="error"><slot></slot></label>
@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        props: ['type', 'name', 'text', 'error', 'inputClasses'],
+        props: ['inputType', 'name', 'text', 'error', 'classes'],
 
         data() {
             return {

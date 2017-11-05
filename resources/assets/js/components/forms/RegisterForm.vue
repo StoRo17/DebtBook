@@ -4,40 +4,28 @@
             <div class="col s12">
                 <h2 class="center-align">{{ 'auth.sign_up' | trans }}</h2>
                 <div class="row">
-                    <div class="input-field">
-                        <input id="email"
-                               type="email"
-                               name="email"
-                               :class="[form.errors.has('email') ? 'invalid' : '']"
-                               v-model="form.email">
-                        <label for="email"
-                               :data-error="form.errors.get('email')">Email
-                        </label>
-                    </div>
+                    <input-field inputType="email"
+                                 name="email"
+                                 v-model="form.email"
+                                 :error="form.errors.get('email')"
+                                 :classes="{'invalid': form.errors.has('email')}">Email
+                    </input-field>
                 </div>
                 <div class="row">
-                    <div class="input-field">
-                        <input id="password"
-                               type="password"
-                               name="password"
-                               :class="[form.errors.has('password') ? 'invalid' : '']"
-                               v-model="form.password">
-                        <label for="password"
-                               :data-error="form.errors.get('password')">{{ 'auth.password' | trans }}
-                        </label>
-                    </div>
+                    <input-field inputType="password"
+                                 name="password"
+                                 v-model="form.password"
+                                 :error="form.errors.get('password')"
+                                 :classes="{'invalid': form.errors.has('password')}">{{ 'auth.password' | trans }}
+                    </input-field>
                 </div>
                 <div class="row">
-                    <div class="input-field">
-                        <input id="password_confirmation"
-                               type="password"
-                               name="password_confirmation"
-                               :class="[form.errors.has('password_confirmation') ? 'invalid' : '']"
-                               v-model="form.password_confirmation">
-                        <label for="password_confirmation"
-                               :data-error="form.errors.get('password_confirmation')">{{ 'auth.password_confirmation' | trans }}
-                        </label>
-                    </div>
+                    <input-field inputType="password"
+                                 name="password_confirmation"
+                                 v-model="form.password_confirmation"
+                                 :error="form.errors.get('password_confirmation')"
+                                 :classes="{'invalid': form.errors.has('password_confirmation')}">{{ 'auth.password_confirmation' | trans }}
+                    </input-field>
                 </div>
                 <div class="row center-align">
                     <button class="btn waves-effect waves-light" :disabled="form.errors.any()" name="submit">{{ 'auth.submit' | trans }}
@@ -51,8 +39,13 @@
 
 <script>
     import Form from '../../Form';
+    import InputField from './InputField.vue';
 
     export default {
+        components: {
+            InputField
+        },
+
         data() {
             return {
                 form: new Form({
