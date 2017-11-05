@@ -61,4 +61,29 @@ class RegisterTest extends DuskTestCase
             $this->assertEquals('true', $buttonDisabledAttr);
         });
     }
+
+    public function testFormWithWrongData()
+    {
+        $email = 'john@a';
+        $this->browse(function (Browser $browser) use ($email) {
+            $emailError = Lang::get('validation.email', ['attribute' => 'email']);
+            $passwordError = Lang::get('validation.confirmed', ['attribute' => 'password']);
+
+            $browser->visit('/auth/register')
+                ->type('email', $email)
+                ->type('password', '123456')
+                ->type('password_confirmation', '1234567')
+                ->press('submit')
+                ->waitFor("label[data-error]");
+
+            $displayedEmailError = $browser->attribute('label[for=email]', 'data-error');
+            $displayedPasswordError = $browser->attribute('label[for=password]', 'data-error');
+            $this->assertEquals($passwordError, $displayedPasswordError);
+            $this->assertEquals($emailError, $displayedEmailError);
+        });
+
+        $this->assertDatabaseMissing('users', [
+            'email' => $email
+        ]);
+    }
 }
