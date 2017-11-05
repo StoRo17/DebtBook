@@ -40,10 +40,12 @@ class RegisterTest extends TestCase
     {
         $user = factory(User::class)->create();
         $response = $this->get("verify-email/{$user->email_token}");
-        $user = User::find($user->id);
-
+        
         $response->assertRedirect('/email-confirmed');
-        $this->assertEquals(true, $user->verified);
-        $this->assertEquals(null, $user->email_token);
+        $this->assertDatabaseHas('users', [
+            'email' => $user->email,
+            'verified' => true,
+            'email_token' => null,
+        ]);
     }
 }
