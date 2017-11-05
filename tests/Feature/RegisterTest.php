@@ -11,8 +11,9 @@ class RegisterTest extends TestCase
 
     public function testRegister()
     {
+        $email = 'johndoe@gmail.com';
         $response = $this->postJson('auth/register', [
-            'email' => 'johndoe@gmail.com',
+            'email' => $email,
             'password' => '123456',
             'password_confirmation' => '123456'
         ]);
@@ -21,5 +22,10 @@ class RegisterTest extends TestCase
             ->assertJson([
                 'message' => 'Register complete'
             ]);
+
+        $this->assertDatabaseHas('users', [
+            'email' => $email,
+            'email_token' => base64_encode($email)
+        ]);
     }
 }
