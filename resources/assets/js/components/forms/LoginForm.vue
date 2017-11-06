@@ -51,8 +51,8 @@
             onSubmit() {
                 this.form.post('/auth/login')
                     .then(response => {
-                        $this.router.push({name: 'startView'});
                         location.reload();
+                        this.$router.push({name: 'startView'});
                     })
                     .catch(error => {
 
