@@ -2,6 +2,7 @@ import VueRouter from 'vue-router';
 import StartView from './views/StartView.vue';
 import VerificationView from './views/VerificationView.vue';
 import EmailConfirmedView from './views/EmailConfirmedView.vue';
+import NotFoundView from './views/NotFoundView.vue';
 import RegisterForm from './components/forms/RegisterForm.vue';
 import LoginForm from './components/forms/LoginForm.vue';
 
@@ -36,11 +37,14 @@ const routes = [
         name: 'verification',
         component: VerificationView
     },
-
     {
         path: '/email-confirmed',
         name: 'emailConfirmed',
         component: EmailConfirmedView
+    },
+    {
+        path: '*',
+        component: NotFoundView
     }
 ];
 
