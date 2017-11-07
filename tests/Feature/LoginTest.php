@@ -31,7 +31,7 @@ class LoginTest extends TestCase
             'verified' => true,
         ]);
 
-        $response = $this->postJson('auth/login', [
+        $response = $this->postJson(route('login'), [
             'email' => $user->email,
             'password' => $password
         ]);
@@ -47,7 +47,7 @@ class LoginTest extends TestCase
         $password = 'secret';
         $user = factory(User::class)->create();
 
-        $response = $this->postJson('auth/login', [
+        $response = $this->postJson(route('login'), [
             'email' => $user->email,
             'password' => $password
         ]);
@@ -61,7 +61,7 @@ class LoginTest extends TestCase
     public function testPasswordErrorReturns()
     {
         $user = factory(User::class)->states('verified')->create();
-        $response = $this->postJson('auth/login', [
+        $response = $this->postJson(route('login'), [
             'email' => $user->email,
             'password' => 'secret1'
         ]);
@@ -75,7 +75,7 @@ class LoginTest extends TestCase
     public function testEmailErrorReturns()
     {
         factory(User::class)->states('verified')->create();
-        $response = $this->postJson('auth/login', [
+        $response = $this->postJson(route('login'), [
             'email' => 'a@com',
             'password' => 'secret'
         ]);
