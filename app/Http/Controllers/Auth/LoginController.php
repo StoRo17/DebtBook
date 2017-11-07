@@ -40,6 +40,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     * @throws ValidationException
+     */
     protected function attemptLogin(Request $request)
     {
         if ($this->verified($request->email)) {
@@ -53,7 +60,12 @@ class LoginController extends Controller
         ])->status(422);
     }
 
-
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
@@ -65,6 +77,12 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * Check is user email is verified.
+     *
+     * @param string $email
+     * @return bool
+     */
     protected function verified($email)
     {
         return User::where('email', $email)->first()->verified;

@@ -84,6 +84,12 @@ class RegisterController extends Controller
         ], 201);
     }
 
+    /**
+     * Verify user email.
+     *
+     * @param string $token
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function verify($token)
     {
         $user = User::where('email_token', $token)->first();
