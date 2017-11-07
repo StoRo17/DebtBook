@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import DebtsCollection from '../components/DebtsCollection.vue'
+    import DebtsCollection from '../../components/DebtsCollection.vue'
 
     export default {
         components: {
