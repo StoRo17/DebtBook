@@ -21,5 +21,7 @@ return [
     'verification_message' => 'A verification email has been sent to your email address',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'email_not_verified' => 'Email has been not verified.',
+    'wrong_email' => 'Given email was not found in the system.',
+    'wrong_password' => 'Given password is incorrect.'
 ];

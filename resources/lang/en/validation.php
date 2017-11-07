@@ -101,7 +101,6 @@ return [
 
     'custom' => [
         'email' => [
-            'not_verified' => 'Email has not been verified.',
         ],
     ],
 
