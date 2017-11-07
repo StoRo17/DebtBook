@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 Route::get('/verify-email/{token}', 'Auth\RegisterController@verify');
 
-Route::post('auth/register', 'Auth\RegisterController@register');
-Route::post('auth/login', 'Auth\LoginController@login');
+Route::prefix('auth')->group(function () {
+    Route::post('register', 'Auth\RegisterController@register')->name('register');
+    Route::post('login', 'Auth\LoginController@login')->name('login');
+});
 
 Route::get('/{vue?}', function () { return view('master'); })->where('vue', '[\/\w\.-]*');
