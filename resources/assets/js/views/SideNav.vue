@@ -10,7 +10,7 @@
         </li>
         <li><router-link to="/debts-history" class="waves-effect"><i class="material-icons">book</i>История долгов</router-link></li>
         <li><div class="divider"></div></li>
-        <li><sign-button link-to="/logout" caption="auth.logout"></sign-button></li>
+        <li><router-link to="/logout" caption="auth.logout"></router-link></li>
     </div>
 </template>
 
