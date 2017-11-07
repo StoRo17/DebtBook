@@ -105,8 +105,8 @@ return [
     |
     */
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'not_verified' => 'Электронный адрес не был проверен.',
         ],
     ],
     /*
