@@ -45,7 +45,7 @@ class LoginTest extends TestCase
         $response->assertJson([
             'message' => 'The given data was invalid.',
             'errors' => [
-                'email' => ['Email has not been verified']
+                'email' => [Lang::get('email.not_verified')]
             ]
         ]);
     }

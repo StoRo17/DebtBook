@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
+use Mariuzzo\LaravelJsLocalization\Generators\LangJsGenerator;
 
 class LoginController extends Controller
 {
@@ -56,7 +58,7 @@ class LoginController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'email' => ['Email has not been verified']
+            'email' => [Lang::get('email.not_verified')]
         ])->status(422);
     }
 
