@@ -150,7 +150,7 @@ class LoginController extends Controller
      * Check is user email verified.
      *
      * @param string $email
-     * @return User
+     * @return bool
      */
     protected function verified($email)
     {
