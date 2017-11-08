@@ -21,4 +21,8 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'Auth\LoginController@login')->name('login');
 });
 
+Route::get('/user/{id}', function ($id) {
+    return \App\User::find($id)->toArray();
+});
+
 Route::get('/{vue?}', function () { return view('master'); })->where('vue', '[\/\w\.-]*');

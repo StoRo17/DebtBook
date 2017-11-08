@@ -4,7 +4,7 @@ import NotFoundView from './views/NotFoundView.vue';
 
 let routes = [
     {
-        path: '/',
+        path: '/:id',
         name: 'main',
         component: MainPage
     },

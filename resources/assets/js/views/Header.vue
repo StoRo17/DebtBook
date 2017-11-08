@@ -5,7 +5,7 @@
                 <slot name="logo"></slot>
                 <a href="" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <slot name="nav"></slot>
+                    <slot name="nav" :user="user"></slot>
                 </ul>
                 <ul id="slide-out" class="side-nav">
                     <slot name="side-nav"></slot>
@@ -17,6 +17,18 @@
 
 <script>
     export default {
+        data() {
+            return {
+                user: ''
+            }
+        },
+
+        created() {
+            this.$router.app.$on('user-loaded', (user) => {
+                this.user = user;
+            });
+        },
+
         mounted() {
             $( document ).ready(function(){
                 $(".button-collapse").sideNav({
