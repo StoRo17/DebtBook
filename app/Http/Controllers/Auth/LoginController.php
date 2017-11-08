@@ -147,7 +147,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Return an user instance.
+     * Check is user email verified.
      *
      * @param string $email
      * @return User
