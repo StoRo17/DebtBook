@@ -55,5 +55,17 @@
 </template>
 
 <script>
+    export default {
+        data() {
+            return {
+                user: ''
+            }
+        },
 
+        created() {
+            this.$router.app.$on('user-loaded', (user) => {
+               this.user = user;
+            });
+        }
+    }
 </script>
