@@ -80,7 +80,7 @@ class LoginTest extends TestCase
             'password' => 'secret'
         ]);
 
-        $this->errorMessage['errors'] = ['email' => [trans('auth.wrong_email')]];
+        $this->errorMessage['errors'] = ['email' => [trans('validation.exists', ['attribute' => 'email'])]];
 
         $response->assertStatus(422);
         $response->assertJson($this->errorMessage);

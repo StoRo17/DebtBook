@@ -42,6 +42,20 @@ class LoginController extends Controller
     }
 
     /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required|string|exists:users',
+            'password' => 'required|string',
+        ]);
+    }
+
+    /**
      * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -125,15 +139,11 @@ class LoginController extends Controller
      */
     protected function getErrorMessage(Request $request)
     {
-        $user = $this->user($request->email);
-        if ($user != null) {
-            if ($user->verified) {
-                return ['password' => [trans('auth.wrong_password')]];
-            }
-            return ['email' => [trans('auth.email_not_verified')]];
+        if ($this->verified($request->email)) {
+            return ['password' => [trans('auth.wrong_password')]];
         }
 
-        return ['email' => [trans('auth.wrong_email')]];
+        return ['email' => [trans('auth.email_not_verified')]];
     }
 
     /**
@@ -142,8 +152,8 @@ class LoginController extends Controller
      * @param string $email
      * @return User
      */
-    protected function user($email)
+    protected function verified($email)
     {
-        return User::where('email', $email)->first();
+        return User::where('email', $email)->first()->verified;
     }
 }
