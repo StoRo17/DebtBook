@@ -34,6 +34,14 @@ class RegisterTest extends TestCase
             'email' => $email,
             'email_token' => base64_encode($email)
         ]);
+
+        $this->assertDatabaseHas('profiles', [
+            'id' => 1,
+            'first_name' => null,
+            'last_name' => null,
+            'avatar' => 'storage/avatars/no_image.jpg',
+            'user_id' => 1
+        ]);
     }
 
     public function testUserVerified()
