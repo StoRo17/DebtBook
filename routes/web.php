@@ -25,4 +25,8 @@ Route::get('/users/{id}', function ($id) {
     return \App\User::find($id)->toArray();
 });
 
+Route::get('/users/{id}/profile', function ($id) {
+    return \App\Profile::where('user_id', $id)->get()->toArray();
+});
+
 Route::get('/{vue?}', function () { return view('master'); })->where('vue', '[\/\w\.-]*');
