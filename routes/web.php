@@ -21,9 +21,7 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'Auth\LoginController@login')->name('login');
 });
 
-Route::get('/users/{id}', function ($id) {
-    return \App\User::find($id)->toArray();
-});
+Route::get('/users/{id}', 'UserController@show');
 
 Route::get('/users/{id}/profile', function ($id) {
     return \App\Profile::where('user_id', $id)->get()->toArray();
