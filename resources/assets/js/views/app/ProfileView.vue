@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <div class="row">
             <div class="col s12 center-align hide-on-large-only">
                 <a href="/" class="waves-light btn" style="margin-top: 10px;">Назад</a>

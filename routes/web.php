@@ -21,7 +21,7 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'Auth\LoginController@login')->name('login');
 });
 
-Route::get('/user/{id}', function ($id) {
+Route::get('/users/{id}', function ($id) {
     return \App\User::find($id)->toArray();
 });
 

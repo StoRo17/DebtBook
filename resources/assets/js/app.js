@@ -14,7 +14,7 @@ if (document.querySelector('#app')) {
         router,
 
         created() {
-            axios.get('/user/' + this.$route.params.id)
+            axios.get('/users/' + this.$route.params.id)
                 .then((response) => {
                     app.$emit('user-loaded', response.data);
                 })
