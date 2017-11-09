@@ -1,9 +1,11 @@
 <div id="app">
     <header-nav>
-        <router-link slot="logo" :to="{name: 'user'}" class="brand-logo center" exact>DebtBook</router-link>
+        <template slot="logo" scope="props">
+            <router-link :to="{name: 'user', params: { id: props.userId }}" class="brand-logo center" exact>DebtBook</router-link>
+        </template>
         <template slot="nav" scope="props">
-            <li><router-link :to="{name: 'profile'}" class="waves-effect" exact>@{{ props.user.email }}</router-link></li>
-            <li><img class="circle responsive-img" src="storage/avatars/no_image.jpg"></li>
+            <li><router-link :to="{name: 'profile', params: { id: props.user.id }}" class="waves-effect" exact>@{{ props.user.email }}</router-link></li>
+            <li><img class="circle responsive-img" :src="props.avatar"></li>
         </template>
         <div slot="side-nav">
             <side-nav></side-nav>
