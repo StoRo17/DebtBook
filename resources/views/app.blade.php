@@ -1,8 +1,8 @@
 <div id="app">
     <header-nav>
-        <router-link slot="logo" :to="{name: 'main'}" class="brand-logo center" exact>DebtBook</router-link>
+        <router-link slot="logo" :to="{name: 'user'}" class="brand-logo center" exact>DebtBook</router-link>
         <template slot="nav" scope="props">
-            <li><router-link :to="{name: 'main'}" class="waves-effect" exact>@{{ props.user.email }}</router-link></li>
+            <li><router-link :to="{name: 'profile'}" class="waves-effect" exact>@{{ props.user.email }}</router-link></li>
             <li><img class="circle responsive-img" src="storage/avatars/no_image.jpg"></li>
         </template>
         <div slot="side-nav">

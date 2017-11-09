@@ -6,7 +6,7 @@ import NotFoundView from './views/NotFoundView.vue';
 let routes = [
     {
         path: '/user/:id',
-        name: 'main',
+        name: 'user',
         component: MainView
     },
     {
