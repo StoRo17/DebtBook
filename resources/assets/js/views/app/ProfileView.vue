@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="loaded">
         <div class="row">
             <div class="col s12 center-align hide-on-large-only">
                 <a href="/" class="waves-light btn" style="margin-top: 10px;">Назад</a>
@@ -8,15 +8,15 @@
         <div class="row">
             <div class="col s12 m6 l3">
                 <div class="center-align">
-                    <img class="circle responsive-img" src="storage/avatars/no_image.jpg">
+                    <img class="circle responsive-img" :src="profile.avatar">
                 </div>
             </div>
             <div class="col s12 m6 l9">
                 <ul class="collection with-header">
                     <li class="collection-header"><h4>Профиль</h4></li>
-                    <li class="collection-item">Email: storo1017@gmail.com</li>
-                    <li class="collection-item">Имя: Максим</li>
-                    <li class="collection-item">Фамилия: Поташев</li>
+                    <li class="collection-item">Email: {{ user.email }}</li>
+                    <li class="collection-item">Имя: {{ profile.first_name }}</li>
+                    <li class="collection-item">Фамилия: {{ profile.last_name }}</li>
                 </ul>
             </div>
         </div>
@@ -58,14 +58,30 @@
     export default {
         data() {
             return {
-                user: ''
+                loaded: false,
+                user: null,
+                profile: null,
             }
         },
 
         created() {
             this.$router.app.$on('user-loaded', (user) => {
                this.user = user;
+               this.getProfile(user.id);
             });
+        },
+
+        methods: {
+            getProfile(userId) {
+                axios.get('/users/' + userId + '/profile')
+                    .then(response => {
+                        this.profile = response.data[0];
+                        this.loaded = true;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
         }
     }
 </script>
