@@ -21,10 +21,12 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'Auth\LoginController@login')->name('login');
 });
 
-Route::get('/users/{id}', 'UserController@show')->name('getUser');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/users/{id}', 'UserController@show')->name('getUser');
 
-Route::get('/users/{id}/profile', function ($id) {
-    return \App\Profile::where('user_id', $id)->get()->toArray();
+    Route::get('/users/{id}/profile', function ($id) {
+        return \App\Profile::where('user_id', $id)->get()->toArray();
+    });
 });
 
 Route::get('/{vue?}', function () { return view('master'); })->where('vue', '[\/\w\.-]*');
