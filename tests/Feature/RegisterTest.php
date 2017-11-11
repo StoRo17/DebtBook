@@ -27,7 +27,8 @@ class RegisterTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJson([
-                'message' => 'Register complete'
+                'success' => true,
+                'message' => 'Register complete.'
             ]);
 
         $this->assertDatabaseHas('users', [
@@ -39,7 +40,7 @@ class RegisterTest extends TestCase
             'id' => 1,
             'first_name' => null,
             'last_name' => null,
-            'avatar' => 'storage/avatars/no_image.jpg',
+            'avatar' => '/storage/avatars/no_image.jpg',
             'user_id' => 1
         ]);
     }
@@ -47,9 +48,12 @@ class RegisterTest extends TestCase
     public function testUserVerified()
     {
         $user = factory(User::class)->create();
-        $response = $this->get("verify-email/{$user->email_token}");
-        
-        $response->assertRedirect('/email-confirmed');
+        $response = $this->get(route('verifyEmail', $user->email_token));
+
+        $response->assertJson([
+            'success' => true,
+            'message' => 'User email was verified.'
+        ]);
         $this->assertDatabaseHas('users', [
             'email' => $user->email,
             'verified' => true,

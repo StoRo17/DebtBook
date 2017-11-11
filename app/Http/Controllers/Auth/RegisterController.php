@@ -50,7 +50,7 @@ class RegisterController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Register complete'
+            'message' => 'Register complete.'
         ], 201);
     }
 
@@ -70,7 +70,7 @@ class RegisterController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'User email was verified'
+            'message' => 'User email was verified.'
         ]);
     }
 }
