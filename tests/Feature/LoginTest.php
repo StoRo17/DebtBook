@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Lang;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -24,6 +25,8 @@ class LoginTest extends TestCase
 
     public function testUserWithVerifiedEmailCanLogin()
     {
+        Artisan::call('passport:install');
+
         $password = 'secret';
         $user = factory(User::class)->create([
             'password' => bcrypt($password),
@@ -38,8 +41,10 @@ class LoginTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertJson([
-            'message' => 'User logged in'
+            'message' => 'User logged in',
         ]);
+
+        $this->assertArrayHasKey('access_token', $response->json());
     }
 
     public function testUserWithUnverifiedEmailCannotLogin()

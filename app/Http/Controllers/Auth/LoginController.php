@@ -96,8 +96,11 @@ class LoginController extends Controller
     {
         $this->clearLoginAttempts($request);
 
+        $token = auth()->user()->createToken('access_token')->accessToken;
+
         return response()->json([
-            'message' => 'User logged in'
+            'message' => 'User logged in',
+            'access_token' => $token
         ]);
     }
 
