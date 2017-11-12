@@ -3,14 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Lang;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     protected $errorMessage;
 
@@ -41,10 +40,10 @@ class LoginTest extends TestCase
 
         $response->assertSuccessful();
         $response->assertJson([
-            'message' => 'User logged in',
+            'success' => true,
+            'message' => 'User logged in'
         ]);
-
-        $this->assertArrayHasKey('access_token', $response->json());
+        $this->assertArrayHasKey('tokens', $response->json());
     }
 
     public function testUserWithUnverifiedEmailCannotLogin()

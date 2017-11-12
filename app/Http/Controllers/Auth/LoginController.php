@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -96,11 +98,30 @@ class LoginController extends Controller
     {
         $this->clearLoginAttempts($request);
 
-        $token = auth()->user()->createToken('access_token')->accessToken;
+        $passwordClient = DB::table('oauth_clients')
+            ->select('id', 'secret')
+            ->where('password_client', true)
+            ->first();
+
+        $http = new Client();
+
+        $response = $http->post(env('APP_URL') . '/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => $passwordClient->id,
+                'client_secret' => $passwordClient->secret,
+                'username' => $request->email,
+                'password' => $request->password,
+                'scope' => '*',
+            ],
+        ]);
+
+        $tokens = json_decode((string) $response->getBody(), true);
 
         return response()->json([
+            'success' => true,
             'message' => 'User logged in',
-            'access_token' => $token
+            'tokens' => $tokens
         ]);
     }
 
