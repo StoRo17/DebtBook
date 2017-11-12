@@ -70,7 +70,7 @@ class TokenDistributor
 
     /**
      * Returns the id and secret key of Password Grant Client from database.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Model|
      */
     private function getPasswordGrantClient()

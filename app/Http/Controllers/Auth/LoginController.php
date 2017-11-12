@@ -27,13 +27,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
     private $tokenDistributor;
 
     /**
@@ -44,7 +37,6 @@ class LoginController extends Controller
     public function __construct(TokenDistributor $tokenDistributor)
     {
         $this->tokenDistributor = $tokenDistributor;
-        $this->middleware('guest')->except('logout');
     }
 
     /**
