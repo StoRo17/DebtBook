@@ -168,6 +168,8 @@ return [
          * Package Service Providers...
          */
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...

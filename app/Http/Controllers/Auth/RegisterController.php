@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\RegisterRequest;
 use App\Jobs\SendVerificationEmail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -21,35 +20,6 @@ class RegisterController extends Controller
     | validation and creation.
     |
     */
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -69,19 +39,18 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RegisterRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $this->validator($request->all())->validate();
-
         event(new Registered($user = $this->create($request->all())));
         $user->profile()->create();
         dispatch(new SendVerificationEmail($user));
 
         return response()->json([
-            'message' => 'Register complete'
+            'success' => true,
+            'message' => 'Register complete.'
         ], 201);
     }
 
@@ -97,18 +66,11 @@ class RegisterController extends Controller
         $user->verified = true;
         $user->email_token = null;
 
-        if ($user->save()) {
-            return redirect('/email-confirmed');
-        }
-    }
+        $user->save();
 
-    /**
-     * Get the guard to be used during registration.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    protected function guard()
-    {
-        return Auth::guard();
+        return response()->json([
+            'success' => true,
+            'message' => 'User email was verified.'
+        ]);
     }
 }
