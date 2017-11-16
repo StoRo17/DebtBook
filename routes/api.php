@@ -17,4 +17,5 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/users/{id}', 'UserController@show')->name('getUser');
+    Route::put('/users/{id}/profile', 'ProfileController@update')->name('updateProfile');
 });
