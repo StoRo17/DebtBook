@@ -34,6 +34,7 @@ class ProfileControllerTest extends TestCase
         $this->assertDatabaseHas('profiles', [
             'first_name' => $firstName,
             'last_name' => $lastName,
+            'avatar' => '/storage/avatars/no_image.jpg'
         ]);
         $response->assertJson([
             'success' => true,
