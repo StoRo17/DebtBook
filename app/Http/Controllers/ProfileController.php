@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Resources\User as UserResource;
+use App\Services\AvatarHandler;
 
 class ProfileController extends Controller
 {
-    public function update(ProfileRequest $request, $id)
+    public function update(ProfileRequest $request, AvatarHandler $avatarHandler, $id)
     {
         $user = $request->user();
 
-        $path = '/storage/avatars/';
-        if ($request->hasFile('avatar')) {
-            $fileName = $id . '_avatar.jpg';
-            $path .= $fileName;
-            $request->file('avatar')->storeAs('/avatars', $fileName, 'public');
-        } else {
-            $path .= 'no_image.jpg';
-        }
+        $path = $avatarHandler->handleUploadedImage($request, $id);
 
         $user->profile()->update([
             'first_name' => $request->first_name,
