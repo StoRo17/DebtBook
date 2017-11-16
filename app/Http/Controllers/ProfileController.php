@@ -10,7 +10,21 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request, $id)
     {
         $user = $request->user();
-        $user->profile()->update($request->all());
+
+        $path = '/storage/avatars/';
+        if ($request->hasFile('avatar')) {
+            $fileName = $id . '_avatar';
+            $path .= $fileName;
+            $request->file('avatar')->storeAs('/avatars', $fileName);
+        } else {
+            $path .= 'no_image.jpg';
+        }
+
+        $user->profile()->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'avatar' => $path
+        ]);
 
         return (new UserResource($user))
             ->additional([
