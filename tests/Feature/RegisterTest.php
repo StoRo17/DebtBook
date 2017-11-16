@@ -12,6 +12,17 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $errorMessage;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->errorMessage = [
+            'message' => 'The given data was invalid.',
+            'errors' => []
+        ];
+    }
+
     public function testRegister()
     {
         Mail::fake();
@@ -48,6 +59,22 @@ class RegisterTest extends TestCase
             'avatar' => '/storage/avatars/no_image.jpg',
             'user_id' => 1
         ]);
+    }
+
+    public function testRegisterFailsWhenSendEmptyData()
+    {
+        $response = $this->postJson(route('register'));
+
+        $requiredString = 'validation.required';
+        $this->errorMessage['errors'] = [
+            'email' => [trans($requiredString, ['attribute' => 'email'])],
+            'password' => [trans($requiredString, ['attribute' => 'password'])],
+            'first_name' => [trans($requiredString, ['attribute' => 'first name'])],
+            'last_name' => [trans($requiredString, ['attribute' => 'last name'])],
+        ];
+
+        $response->assertStatus(422);
+        $response->assertJson($this->errorMessage);
     }
 
     public function testUserVerified()
