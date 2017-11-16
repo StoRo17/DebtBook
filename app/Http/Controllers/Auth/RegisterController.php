@@ -44,8 +44,10 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        event(new Registered($user = $this->create($request->all())));
-        $user->profile()->create();
+        $user = $this->create($request->only(['email', 'password']));
+        $user->profile()->create($request->only(['first_name', 'last_name']));
+
+        event(new Registered($user));
         dispatch(new SendVerificationEmail($user));
 
         return response()->json([

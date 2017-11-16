@@ -17,10 +17,15 @@ class RegisterTest extends TestCase
         Mail::fake();
 
         $email = 'johndoe@gmail.com';
+        $firstName = 'John';
+        $lastName = 'Doe';
+
         $response = $this->postJson(route('register'), [
             'email' => $email,
             'password' => '123456',
-            'password_confirmation' => '123456'
+            'password_confirmation' => '123456',
+            'first_name' => $firstName,
+            'last_name' => $lastName
         ]);
 
         Mail::assertSent(EmailVerification::class);
@@ -38,8 +43,8 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('profiles', [
             'id' => 1,
-            'first_name' => null,
-            'last_name' => null,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'avatar' => '/storage/avatars/no_image.jpg',
             'user_id' => 1
         ]);
