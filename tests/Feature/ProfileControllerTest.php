@@ -16,6 +16,8 @@ class ProfileControllerTest extends TestCase
 
     private $user;
 
+    private $errorMessage;
+
     public function setUp()
     {
         parent::setUp();
@@ -28,6 +30,11 @@ class ProfileControllerTest extends TestCase
             ->first();
 
         Passport::actingAs($this->user, ['*']);
+
+        $this->errorMessage = [
+            'message' => 'The given data was invalid.',
+            'errors' => []
+        ];
     }
 
     public function testFirstAndLastNamesUpdate()
@@ -72,5 +79,36 @@ class ProfileControllerTest extends TestCase
         ]);
 
         Storage::disk('public')->assertExists("avatars/{$this->user->id}_avatar.jpg");
+    }
+
+    public function testNotImageFormatFileDoesNotUpload()
+    {
+        Storage::fake('public');
+        $firstName = $this->user->profile->first_name;
+        $lastName = $this->user->profile->last_name;
+
+        $response = $this->putJson(route('updateProfile', $this->user->id),[
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'avatar' => UploadedFile::fake()->create('avatar.txt')
+        ]);
+
+        $this->errorMessage['errors'] = [
+            'avatar' => [trans('validation.image', ['attribute' => 'avatar'])]
+        ];
+
+        $response->assertExactJson($this->errorMessage);
+    }
+
+    public function testReceiveErrorsWhenSendInvalidData()
+    {
+        $response = $this->putJson(route('updateProfile', $this->user->id));
+
+        $this->errorMessage['errors'] = [
+            'first_name' => [trans('validation.required', ['attribute' => 'first name'])],
+            'last_name' => [trans('validation.required', ['attribute' => 'last name'])]
+        ];
+        $response->assertStatus(422)
+            ->assertExactJson($this->errorMessage);
     }
 }
