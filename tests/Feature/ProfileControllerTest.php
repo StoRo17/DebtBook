@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Profile;
 use App\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,9 +14,12 @@ class ProfileControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testFirstAndLastNamesUpdate()
+    private $user;
+
+    public function setUp()
     {
-        $user = factory(User::class, 1)
+        parent::setUp();
+        $this->user = factory(User::class, 1)
             ->states('verified')
             ->create()
             ->each(function ($u) {
@@ -22,11 +27,14 @@ class ProfileControllerTest extends TestCase
             })
             ->first();
 
-        Passport::actingAs($user, ['*']);
+        Passport::actingAs($this->user, ['*']);
+    }
 
+    public function testFirstAndLastNamesUpdate()
+    {
         $firstName = 'John';
         $lastName = 'Doe';
-        $response = $this->putJson(route('updateProfile', $user->id), [
+        $response = $this->putJson(route('updateProfile', $this->user->id), [
             'first_name' => $firstName,
             'last_name' => $lastName,
         ]);
@@ -44,5 +52,25 @@ class ProfileControllerTest extends TestCase
         $responseArray = $response->json();
         $this->assertEquals($firstName, $responseArray['data']['profile']['first_name']);
         $this->assertEquals($lastName, $responseArray['data']['profile']['last_name']);
+    }
+
+    public function testAvatarUpload()
+    {
+        Storage::fake('public');
+        $firstName = $this->user->profile->first_name;
+        $lastName = $this->user->profile->last_name;
+
+        $response = $this->putJson(route('updateProfile', $this->user->id),[
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'avatar' => UploadedFile::fake()->image('avatar.jpg')
+        ]);
+
+        $this->assertDatabaseHas('profiles', [
+            'first_name' => $firstName,
+            'avatar' => "/storage/avatars/{$this->user->id}_avatar.jpg"
+        ]);
+
+        Storage::disk('public')->assertExists("avatars/{$this->user->id}_avatar.jpg");
     }
 }

@@ -13,9 +13,9 @@ class ProfileController extends Controller
 
         $path = '/storage/avatars/';
         if ($request->hasFile('avatar')) {
-            $fileName = $id . '_avatar';
+            $fileName = $id . '_avatar.jpg';
             $path .= $fileName;
-            $request->file('avatar')->storeAs('/avatars', $fileName);
+            $request->file('avatar')->storeAs('/avatars', $fileName, 'public');
         } else {
             $path .= 'no_image.jpg';
         }
