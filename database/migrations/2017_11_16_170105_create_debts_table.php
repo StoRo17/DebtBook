@@ -17,11 +17,11 @@ class CreateDebtsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->decimal('amount', 10);
+            $table->unsignedDecimal('amount', 10);
             $table->enum('currency', ['dollar', 'euro', 'ruble']);
             $table->string('name');
             $table->enum('type', ['give', 'take']);
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
