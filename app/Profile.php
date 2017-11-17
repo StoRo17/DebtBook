@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['first_name', 'last_name', 'avatar'];
 
     public $timestamps = false;
 
