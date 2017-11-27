@@ -12,4 +12,9 @@ class Debt extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function history()
+    {
+        return $this->hasMany(DebtsHistory::class);
+    }
 }
