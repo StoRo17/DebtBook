@@ -3,21 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Debt;
+use App\DebtsHistory;
+use App\User;
 use Illuminate\Http\Request;
 
 class DebtController extends Controller
 {
-    private $debts;
+    private $debt;
 
-    public function __construct(Debt $debts)
+    public function __construct(Debt $debt)
     {
-        $this->debts = $debts;
+        $this->debt = $debt;
     }
 
     public function index($userId)
     {
-        $debts = $this->debts->where('user_id', $userId)->get();
+        $debts = $this->debt->where('user_id', $userId)->get();
 
         return $debts;
+    }
+
+    public function create(Request $request, $userId)
+    {
+        $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
+
+        $debt = $this->debt;
+        $debt->currency_id = $request->currency_id;
+        $debt->total_amount = $totalAmount;
+        $debt->name = $request->name;
+        $debt->user()->associate($request->user())->save();
+
+        return $debt;
     }
 }

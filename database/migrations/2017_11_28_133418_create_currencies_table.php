@@ -19,10 +19,6 @@ class CreateCurrenciesTable extends Migration
             $table->string('currency', 3)->unique();
         });
 
-        Schema::table('debts', function (Blueprint $table) {
-            $table->foreign('currency_id')->references('id')->on('currencies');
-        });
-
         DB::table('currencies')->insert([
             ['currency' => 'RUB'],
             ['currency' => 'USD'],

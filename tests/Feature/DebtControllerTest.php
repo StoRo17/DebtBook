@@ -35,7 +35,7 @@ class DebtControllerTest extends TestCase
     {
         $data = [
             'amount' => '100',
-            'currencyId' => '1',
+            'currency_id' => '1',
             'name' => 'John',
             'type' => 'give',
             'comment' => 'Beer',

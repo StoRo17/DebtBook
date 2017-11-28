@@ -18,6 +18,7 @@ class CreateDebtsTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('currency_id');
+            $table->foreign('currency_id')->references('id')->on('currencies');
             $table->decimal('total_amount', 10);
             $table->string('name');
             $table->timestamps();
