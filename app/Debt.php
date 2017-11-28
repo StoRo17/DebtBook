@@ -17,4 +17,9 @@ class Debt extends Model
     {
         return $this->hasMany(DebtsHistory::class);
     }
+
+    public function currency()
+    {
+        return $this->hasOne(Currency::class);
+    }
 }
