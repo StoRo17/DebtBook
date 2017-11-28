@@ -32,7 +32,9 @@ class DebtController extends Controller
         $debt->currency_id = $request->currency_id;
         $debt->total_amount = $totalAmount;
         $debt->name = $request->name;
+
         $debt->user()->associate($request->user())->save();
+        $debt->history()->create($request->all());
 
         return $debt;
     }

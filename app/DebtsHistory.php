@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DebtsHistory extends Model
 {
-    protected $fillable = ['amount', 'currency', 'type', 'comment'];
+    protected $fillable = ['amount', 'type', 'comment'];
 
     public function debt()
     {
