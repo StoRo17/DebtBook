@@ -42,19 +42,22 @@ class DebtControllerTest extends TestCase
         ];
 
         $response = $this->postJson(route('createDebt', $this->user->id), $data);
-
-        $data['id'] = $this->user->debts()->where('name', $data['name'])
+        $data['id'] = $this->user->debts()
+            ->where('name', $data['name'])
             ->limit(1)
             ->first()
             ->id;
-        $data['total_amount'] = $data['amount'];
-        unset($data['amount']);
 
-        $response->assertJson($data);
+        $response->assertJson([
+            'id' => $data['id'],
+            'total_amount' => $data['amount'],
+            'currency_id' => $data['currency_id'],
+            'name' => $data['name'],
+        ]);
         $this->assertDatabaseHas('debts', [
             'id' => $data['id'],
-            'total_amount' => $data['total_amount'],
-            'currency_id' => $data['currencyId'],
+            'total_amount' => $data['amount'],
+            'currency_id' => $data['currency_id'],
             'name' => $data['name'],
         ]);
         $this->assertDatabaseHas('debts_histories', [
