@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Debt;
 use Illuminate\Http\Request;
 
 class DebtController extends Controller
 {
-    private $user;
+    private $debts;
 
-    public function __construct(User $user)
+    public function __construct(Debt $debts)
     {
-        $this->user = $user;
+        $this->debts = $debts;
     }
+
     public function index($userId)
     {
-        $user = $this->user->find($userId);
+        $debts = $this->debts->where('user_id', $userId)->get();
 
-        return $user->debts;
+        return $debts;
     }
 }
