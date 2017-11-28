@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Debt;
 use App\DebtsHistory;
+use App\Http\Requests\DebtCreationRequest;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class DebtController extends Controller
         return $debts;
     }
 
-    public function create(Request $request, $userId)
+    public function create(DebtCreationRequest $request, $userId)
     {
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
 

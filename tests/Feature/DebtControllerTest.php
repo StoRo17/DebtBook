@@ -34,8 +34,8 @@ class DebtControllerTest extends TestCase
     public function testDebtCreateAndDebtHistoryAdd()
     {
         $data = [
-            'amount' => '100',
-            'currency_id' => '1',
+            'amount' => 100,
+            'currency_id' => 1,
             'name' => 'John',
             'type' => 'give',
             'comment' => 'Beer',
