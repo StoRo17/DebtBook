@@ -17,19 +17,16 @@ class DebtControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class, 1)
+        $this->user = factory(User::class)
             ->states('verified')
-            ->create()
-            ->each(function ($u) {
-                $u->debts()->saveMany(factory(Debt::class, 5)->make());
-            })
-            ->first();
+            ->create();
 
         Passport::actingAs($this->user, ['*']);
     }
 
     public function testIndex()
     {
+        $this->user->debts()->saveMany(factory(Debt::class, 5)->make());
         $response = $this->getJson(route('getDebts', $this->user->id));
         $response->assertJson($this->user->debts->toArray());
     }
