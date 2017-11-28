@@ -43,7 +43,10 @@ class DebtControllerTest extends TestCase
 
         $response = $this->postJson(route('createDebt', $this->user->id), $data);
 
-        $data['id'] = 1;
+        $data['id'] = $this->user->debts()->where('name', $data['name'])
+            ->limit(1)
+            ->first()
+            ->id;
         $data['total_amount'] = $data['amount'];
         unset($data['amount']);
 
