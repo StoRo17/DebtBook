@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Debt;
 use App\DebtsHistory;
 use App\Http\Requests\DebtCreationRequest;
+use App\Http\Resources\Debt as DebtResource;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class DebtController extends Controller
     {
         $debts = $this->debt->where('user_id', $userId)->get();
 
-        return $debts;
+        return DebtResource::collection($debts);
     }
 
     public function create(DebtCreationRequest $request, $userId)
@@ -36,6 +37,6 @@ class DebtController extends Controller
         $debt->user()->associate($request->user())->save();
         $debt->history()->create($request->all());
 
-        return $debt;
+        return new DebtResource($debt);
     }
 }

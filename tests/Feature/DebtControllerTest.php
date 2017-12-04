@@ -24,13 +24,6 @@ class DebtControllerTest extends TestCase
         Passport::actingAs($this->user, ['*']);
     }
 
-    public function testIndex()
-    {
-        $this->user->debts()->saveMany(factory(Debt::class, 5)->make());
-        $response = $this->getJson(route('getDebts', $this->user->id));
-        $response->assertJson($this->user->debts->toArray());
-    }
-
     public function testDebtCreateAndDebtHistoryAdd()
     {
         $data = [
@@ -49,10 +42,12 @@ class DebtControllerTest extends TestCase
             ->id;
 
         $response->assertJson([
-            'id' => $data['id'],
-            'total_amount' => $data['amount'],
-            'currency_id' => $data['currency_id'],
-            'name' => $data['name'],
+            'data' => [
+                'id' => $data['id'],
+                'total_amount' => $data['amount'],
+                'currency_id' => $data['currency_id'],
+                'name' => $data['name'],
+            ]
         ]);
         $this->assertDatabaseHas('debts', [
             'id' => $data['id'],
