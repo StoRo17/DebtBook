@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Debt;
-use App\DebtsHistory;
 use App\Http\Requests\DebtCreationRequest;
 use App\Http\Resources\Debt as DebtResource;
-use App\User;
-use Illuminate\Http\Request;
 
 class DebtController extends Controller
 {
@@ -38,5 +35,16 @@ class DebtController extends Controller
         $debt->history()->create($request->all());
 
         return new DebtResource($debt);
+    }
+
+    public function delete($userId, $debtId)
+    {
+        $debt = $this->debt->find($debtId);
+        $debt->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Debt deleted'
+        ]);
     }
 }
