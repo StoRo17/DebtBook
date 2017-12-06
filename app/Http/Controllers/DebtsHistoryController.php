@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DebtsHistory;
-use Illuminate\Http\Request;
+use App\Http\Resources\DebtsHistory as DebtsHistoryResource;
 
 class DebtsHistoryController extends Controller
 {
@@ -14,10 +14,10 @@ class DebtsHistoryController extends Controller
         $this->debtsHistory = $debtsHistory;
     }
 
-    public function show($debtId)
+    public function show($userId, $debtId)
     {
         $debtHistory = $this->debtsHistory->where('debt_id', $debtId);
 
-        return $debtHistory;
+        return new DebtsHistoryResource($debtHistory);
     }
 }
