@@ -21,13 +21,8 @@ class ProfileControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class, 1)
-            ->states('verified')
-            ->create()
-            ->each(function ($u) {
-                $u->profile()->save(factory(Profile::class)->make());
-            })
-            ->first();
+        $this->user = factory(User::class)->states('verified')->create();
+        $this->user->profile()->save(factory(Profile::class)->make());
 
         Passport::actingAs($this->user, ['*']);
 
@@ -57,8 +52,8 @@ class ProfileControllerTest extends TestCase
         ]);
 
         $responseArray = $response->json();
-        $this->assertEquals($firstName, $responseArray['data']['profile']['first_name']);
-        $this->assertEquals($lastName, $responseArray['data']['profile']['last_name']);
+        $this->assertEquals($firstName, $responseArray['data']['first_name']);
+        $this->assertEquals($lastName, $responseArray['data']['last_name']);
     }
 
     public function testAvatarUpload()
