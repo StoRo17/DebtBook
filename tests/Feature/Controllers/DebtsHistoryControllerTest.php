@@ -46,6 +46,41 @@ class DebtsHistoryControllerTest extends TestCase
         ]);
     }
 
+    /**
+     * @dataProvider debtHistoryUpdateProvider
+     */
+    public function testDebtHistoryUpdate($initialAmount, $updatedType, $updatedAmount)
+    {
+        $user = factory(User::class)->states('verified')->create();
+        Passport::actingAs($user);
+        $debt = $user->debts()->create([
+            'total_amount' => $initialAmount,
+            'currency_id' => 1,
+            'name' => 'John',
+        ]);
+        $debtHistory = $debt->history()->create([
+            'amount' => $initialAmount,
+            'type' => 'give',
+        ]);
+
+        $response = $this->putJson(route('updateDebtHistory', [$user->id, $debt->id, $debtHistory->id]), [
+            'amount' => $updatedAmount,
+            'type' => $updatedType
+        ]);
+
+        $response->assertJson(['data' => [
+            'id' => $debtHistory->id,
+            'amount' => $updatedAmount,
+            'type' => $updatedType,
+            ]
+        ]);
+
+        $this->assertDatabaseHas('debts', [
+            'id' => $debt->id,
+            'amount' => $updatedAmount,
+        ]);
+    }
+
     public function debtHistoryCreateProvider()
     {
         return [
@@ -53,6 +88,13 @@ class DebtsHistoryControllerTest extends TestCase
             [1000, 100, 'take', 900],
             [-1000, 100, 'give', -900],
             [100, 100, 'take', 0],
+        ];
+    }
+
+    public function debtHistoryUpdateProvider()
+    {
+        return [
+            [1000, 100, 'give']
         ];
     }
 }
