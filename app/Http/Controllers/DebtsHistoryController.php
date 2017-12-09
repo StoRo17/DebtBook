@@ -14,10 +14,10 @@ class DebtsHistoryController extends Controller
         $this->debtsHistory = $debtsHistory;
     }
 
-    public function show($userId, $debtId)
+    public function index($userId, $debtId)
     {
         $debtHistory = $this->debtsHistory->where('debt_id', $debtId);
 
-        return new DebtsHistoryResource($debtHistory);
+        return DebtsHistoryResource::collection($debtHistory);
     }
 }

@@ -24,6 +24,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('/debts', 'DebtController@create')->name('createDebt');
         Route::delete('/debts/{debtId}', 'DebtController@delete')->name('deleteDebt');
 
-        Route::get('/debts/{debtId}/history', 'DebtsHistoryController@show')->name('getDebtHistory');
+        Route::get('/debts/{debtId}/history', 'DebtsHistoryController@index')->name('getDebtHistory');
     });
 });
