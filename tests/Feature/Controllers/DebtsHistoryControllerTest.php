@@ -49,7 +49,7 @@ class DebtsHistoryControllerTest extends TestCase
     /**
      * @dataProvider debtHistoryUpdateProvider
      */
-    public function testDebtHistoryUpdate($initialAmount, $updatedType, $updatedAmount)
+    public function testDebtHistoryUpdate($initialAmount, $updatedAmount, $updatedType)
     {
         $user = factory(User::class)->states('verified')->create();
         Passport::actingAs($user);
@@ -77,7 +77,7 @@ class DebtsHistoryControllerTest extends TestCase
 
         $this->assertDatabaseHas('debts', [
             'id' => $debt->id,
-            'amount' => $updatedAmount,
+            'total_amount' => $updatedAmount,
         ]);
     }
 
