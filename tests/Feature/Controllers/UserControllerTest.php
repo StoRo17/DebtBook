@@ -14,13 +14,9 @@ class UserControllerTest extends TestCase
 
     public function testUserWithProfileReturns()
     {
-        $user = factory(User::class, 1)
+        $user = factory(User::class)
             ->states('verified')
-            ->create()
-            ->each(function ($u) {
-                $u->profile()->save(factory(Profile::class)->make());
-            })
-            ->first();
+            ->create();
 
         Passport::actingAs($user, ['*']);
 
@@ -31,13 +27,6 @@ class UserControllerTest extends TestCase
             'data' => [
                 'id',
                 'email',
-                'profile' => [
-                    'id',
-                    'user_id',
-                    'first_name',
-                    'last_name',
-                    'avatar'
-                ]
             ]
         ]);
         $response->assertJson([
