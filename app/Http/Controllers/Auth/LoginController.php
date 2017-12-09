@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Services\TokenDistributor;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -25,32 +27,28 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
+     * @var TokenDistributor
      */
-    protected $redirectTo = '/home';
+    private $tokenDistributor;
 
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param TokenDistributor $tokenDistributor
      */
-    public function __construct()
+    public function __construct(TokenDistributor $tokenDistributor)
     {
-        $this->middleware('guest')->except('logout');
+        $this->tokenDistributor = $tokenDistributor;
     }
 
     /**
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @param LoginRequest|Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $this->validateLogin($request);
-
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
@@ -95,12 +93,14 @@ class LoginController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        $request->session()->regenerate();
-
         $this->clearLoginAttempts($request);
 
+        $tokens = $this->tokenDistributor->getTokens($request->email, $request->password);
+
         return response()->json([
-            'message' => 'User logged in'
+            'success' => true,
+            'message' => 'User logged in',
+            'tokens' => $tokens
         ]);
     }
 
@@ -125,25 +125,21 @@ class LoginController extends Controller
      */
     protected function getErrorMessage(Request $request)
     {
-        $user = $this->user($request->email);
-        if ($user != null) {
-            if ($user->verified) {
-                return ['password' => [trans('auth.wrong_password')]];
-            }
-            return ['email' => [trans('auth.email_not_verified')]];
+        if ($this->verified($request->email)) {
+            return ['password' => [trans('auth.wrong_password')]];
         }
 
-        return ['email' => [trans('auth.wrong_email')]];
+        return ['email' => [trans('auth.email_not_verified')]];
     }
 
     /**
-     * Return an user instance.
+     * Check is user email verified.
      *
      * @param string $email
-     * @return User
+     * @return bool
      */
-    protected function user($email)
+    protected function verified($email)
     {
-        return User::where('email', $email)->first();
+        return User::where('email', $email)->first()->verified;
     }
 }

@@ -30,11 +30,25 @@
 </template>
 
 <script>
-    import DebtsCollection from '../../components/DebtsCollection.vue'
+    import DebtsCollection from '../../components/DebtsCollection.vue';
 
     export default {
+        props: ['id'],
+
         components: {
             'debts-collection': DebtsCollection
+        },
+
+        data() {
+            return {
+                user: ''
+            }
+        },
+
+        created() {
+            this.$router.app.$on('user-loaded', (user) => {
+                this.user = user;
+            });
         }
     }
 </script>

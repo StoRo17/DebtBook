@@ -11,6 +11,16 @@ if (document.querySelector('#app')) {
     const app = new Vue({
         el: '#app',
 
-        router
+        router,
+
+        created() {
+            axios.get('/users/' + this.$route.params.id)
+                .then((response) => {
+                    app.$emit('user-loaded', response.data.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
     });
 }
