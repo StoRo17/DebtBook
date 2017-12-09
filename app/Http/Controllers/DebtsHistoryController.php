@@ -37,4 +37,11 @@ class DebtsHistoryController extends Controller
 
         return new DebtsHistoryResource($debtHistory);
     }
+
+    public function update(DebtsHistoryRequest $request, $debtHistoryId)
+    {
+        $this->debtsHistory->update($request->all());
+
+        return new DebtsHistoryResource($this->debtsHistory->find($debtHistoryId));
+    }
 }
