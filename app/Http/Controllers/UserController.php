@@ -9,6 +9,6 @@ class UserController extends Controller
 {
     public function show(Request $request, $id)
     {
-        return new UserResource($request->user()->with('profile')->find($id));
+        return new UserResource($request->user());
     }
 }
