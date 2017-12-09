@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::group(['prefix' => '/users/{userId}'], function () {
         Route::get('/debts', 'DebtController@index')->name('getDebts');
+        Route::get('/debts/{debtId}', 'DebtController@show')->name('getDebt');
         Route::post('/debts', 'DebtController@create')->name('createDebt');
         Route::delete('/debts/{debtId}', 'DebtController@delete')->name('deleteDebt');
 

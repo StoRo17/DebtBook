@@ -22,6 +22,11 @@ class DebtController extends Controller
         return DebtResource::collection($debts);
     }
 
+    public function show($debtId)
+    {
+        return new DebtResource($this->debt->find($debtId));
+    }
+
     public function create(DebtCreationRequest $request, $userId)
     {
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
