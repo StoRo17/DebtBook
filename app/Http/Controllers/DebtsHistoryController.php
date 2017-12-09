@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Debt;
 use App\DebtsHistory;
 use App\Http\Requests\DebtsHistoryCreationRequest;
-use App\Http\Resources\Debt;
 use App\Http\Resources\DebtsHistory as DebtsHistoryResource;
 
 class DebtsHistoryController extends Controller
@@ -19,19 +19,19 @@ class DebtsHistoryController extends Controller
         $this->debtsHistory = $debtsHistory;
     }
 
-    public function index($userId, $debtId)
+    public function index($debtId)
     {
         $debtHistory = $this->debtsHistory->where('debt_id', $debtId)->get();
 
         return DebtsHistoryResource::collection($debtHistory);
     }
 
-    public function create(DebtsHistoryCreationRequest $request, $userId, $debtId)
+    public function create(DebtsHistoryCreationRequest $request, $debtId)
     {
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
 
-        $debt = $this->debt->where('debt_id', $debtId)->get();
-        $debt->total_amount += $totalAmount;
+        $debt = $this->debt->find($debtId);
+        $debt->total_amount = $debt->total_amount + $totalAmount;
         $debtHistory = $debt->history()->create($request->all());
         $debt->save();
 
