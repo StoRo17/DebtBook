@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Debt;
 use App\DebtsHistory;
-use App\Http\Requests\DebtsHistoryCreationRequest;
+use App\Http\Requests\DebtsHistoryRequest;
 use App\Http\Resources\DebtsHistory as DebtsHistoryResource;
 
 class DebtsHistoryController extends Controller
@@ -26,7 +26,7 @@ class DebtsHistoryController extends Controller
         return DebtsHistoryResource::collection($debtHistory);
     }
 
-    public function create(DebtsHistoryCreationRequest $request, $debtId)
+    public function create(DebtsHistoryRequest $request, $debtId)
     {
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
 
