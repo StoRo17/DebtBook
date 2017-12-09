@@ -31,7 +31,7 @@ class DebtsHistoryController extends Controller
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
 
         $debt = $this->debt->find($debtId);
-        $debt->total_amount = $debt->total_amount + $totalAmount;
+        $debt->total_amount += $totalAmount;
         $debtHistory = $debt->history()->create($request->all());
         $debt->save();
 
