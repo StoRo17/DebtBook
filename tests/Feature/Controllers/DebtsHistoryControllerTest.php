@@ -12,20 +12,23 @@ class DebtsHistoryControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testDebtHistoryCreate()
+    /**
+     * @dataProvider debtHistoryCreateProvider
+     */
+    public function testDebtHistoryCreate($totalAmount, $amount, $type, $expectedTotalAmount)
     {
         $user = factory(User::class)->states('verified')->create();
         Passport::actingAs($user);
 
         $debt = $user->debts()->create([
-            'total_amount' => 1000,
+            'total_amount' => $totalAmount,
             'currency_id' => 1,
             'name' => 'John',
         ]);
 
         $data = [
-            'amount' => 100,
-            'type' => 'give',
+            'amount' => $amount,
+            'type' => $type,
             'comment' => 'Some comment',
         ];
 
@@ -39,7 +42,17 @@ class DebtsHistoryControllerTest extends TestCase
         $this->assertDatabaseHas('debts_histories', $data);
         $this->assertDatabaseHas('debts', [
             'id' => $debt->id,
-            'total_amount' => 1100
+            'total_amount' => $expectedTotalAmount
         ]);
+    }
+
+    public function debtHistoryCreateProvider()
+    {
+        return [
+            [1000, 100, 'give', 1100],
+            [1000, 100, 'take', 900],
+            [-1000, 100, 'give', -900],
+            [100, 100, 'take', 0],
+        ];
     }
 }
