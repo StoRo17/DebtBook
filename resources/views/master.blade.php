@@ -13,13 +13,9 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    @if (auth()->check())
-        @include('app')
-    @else
-        @include('startPage')
-    @endif
+    <app></app>
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>
