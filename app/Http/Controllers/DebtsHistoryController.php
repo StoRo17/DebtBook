@@ -49,4 +49,20 @@ class DebtsHistoryController extends Controller
 
         return new DebtsHistoryResource($debtHistory);
     }
+
+    public function delete($debtId, $debtHistoryId)
+    {
+        $debt = $this->debt->find($debtId);
+        $debtHistory = $this->debtsHistory->find($debtHistoryId);
+
+        $debt->total_amount -= $debtHistory->type == 'give' ? $debtHistory->amount : -$debtHistory->amount;
+        $debt->save();
+
+        $debtHistory->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Debt history deleted'
+        ]);
+    }
 }
