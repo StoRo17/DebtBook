@@ -1,3 +1,4 @@
+import VueRouter from 'vue-router';
 import RegisterForm from './components/forms/Register.vue';
 import LoginForm from './components/forms/Login.vue';
 
