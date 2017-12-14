@@ -1,22 +1,16 @@
-import VueRouter from 'vue-router';
-import MainView from './views/app/MainView.vue';
-import ProfileView from './views/app/ProfileView.vue';
-import NotFoundView from './views/NotFoundView.vue';
+import RegisterForm from './components/forms/Register.vue';
+import LoginForm from './components/forms/Login.vue';
 
 let routes = [
     {
-        path: '/user/:id',
-        name: 'user',
-        component: MainView
+        path: '/sign-up',
+        name: 'register',
+        component: RegisterForm
     },
     {
-        path: '/user/:id/profile',
-        name: 'profile',
-        component: ProfileView
-    },
-    {
-        path: '*',
-        component: NotFoundView
+        path: '/sign-in',
+        name: 'login',
+        component: LoginForm
     }
 ];
 
