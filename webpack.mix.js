@@ -11,7 +11,4 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js([
-    'resources/assets/js/app.js',
-    'resources/assets/js/startPage.js'
-], 'public/js/');
+mix.js('resources/assets/js/index.js', 'public/js/app.js');
