@@ -25,7 +25,14 @@ let routes = [
     {
         path: '/verification',
         name: 'verification',
-        component: VerificationComponent
+        component: VerificationComponent,
+        beforeEnter: (to, from, next) => {
+            if (from.name != 'register') {
+                next({name: 'start'});
+            } else {
+                next();
+            }
+        }
     },
     {
         path: '/email-confirmed',
