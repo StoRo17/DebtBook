@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/users/{id}/profile', 'ProfileController@show')->name('getProfile');
     Route::put('/users/{id}/profile', 'ProfileController@update')->name('updateProfile');
 
+    Route::get('/currencies', 'CurrencyController@index')->name('getCurrencies');
+
     Route::group(['prefix' => '/users/{userId}'], function () {
         Route::get('/debts', 'DebtController@index')->name('getDebts');
         Route::get('/debts/{debtId}', 'DebtController@show')->name('getDebt');
