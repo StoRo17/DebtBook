@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import StartComponent from "./components/Start.vue";
+import MainComponent from "./components/Main.vue";
 import RegisterForm from './components/forms/Register.vue';
 import LoginForm from './components/forms/Login.vue';
 import VerificationComponent from './components/Verification.vue';
@@ -9,8 +9,8 @@ import NotFoundComponent from './components/NotFound.vue';
 let routes = [
     {
         path: '/',
-        name: 'start',
-        component: StartComponent
+        name: 'main',
+        component: MainComponent
     },
     {
         path: '/sign-up',
