@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router';
 import MainComponent from "./components/Main.vue";
+import ProfileComponent from "./components/Profile.vue";
 import RegisterForm from './components/forms/Register.vue';
 import LoginForm from './components/forms/Login.vue';
 import VerificationComponent from './components/Verification.vue';
@@ -11,6 +12,12 @@ let routes = [
         path: '/',
         name: 'main',
         component: MainComponent
+    },
+    {
+        path: '/profile',
+        name: 'profile',
+        component: ProfileComponent,
+        meta: { requiresAuth: true}
     },
     {
         path: '/sign-up',
