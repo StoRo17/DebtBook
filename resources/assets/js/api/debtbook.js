@@ -2,6 +2,7 @@ import axios from 'axios';
 
 
 const PREFIX = '/api';
+const USERS_PATH = PREFIX + '/users/';
 
 export default {
     login(data) {
@@ -13,7 +14,11 @@ export default {
     },
 
     getUser(userId) {
-        return get(PREFIX + '/users/' + userId);
+        return get(USERS_PATH + userId);
+    },
+
+    getProfile(userId) {
+        return get(USERS_PATH + userId + '/profile');
     }
 }
 
