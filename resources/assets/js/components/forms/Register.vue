@@ -54,6 +54,7 @@
 </template>
 
 <script>
+    import api from '../../api/debtbook';
     import Form from '../../Form';
     import InputField from './InputField.vue';
 
@@ -76,11 +77,13 @@
 
         methods: {
             onSubmit() {
-                this.form.post('/api/register')
+                api.register(this.form.data())
                     .then(response => {
+                        this.form.onSuccess();
                         this.$router.push({name: 'verification'});
                     })
                     .catch(error => {
+                        this.form.onFail(error);
                     });
             }
         }

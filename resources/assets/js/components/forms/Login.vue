@@ -30,6 +30,7 @@
 </template>
 
 <script>
+    import api from '../../api/debtbook';
     import Form from '../../Form';
     import InputField from './InputField.vue';
 
@@ -49,13 +50,12 @@
 
         methods: {
             onSubmit() {
-                this.form.post('/auth/login')
+                api.login(this.form.data())
                     .then(response => {
-                        location.reload();
-                        this.$router.push({name: 'startView'});
+                        this.form.onSuccess();
                     })
                     .catch(error => {
-
+                        this.form.onFail(error);
                     });
             }
         }
