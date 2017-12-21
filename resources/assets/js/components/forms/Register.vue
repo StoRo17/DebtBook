@@ -12,6 +12,22 @@
                     </input-field>
                 </div>
                 <div class="row">
+                    <input-field inputType="text"
+                                 name="first_name"
+                                 v-model="form.first_name"
+                                 :error="form.errors.get('first_name')"
+                                 :classes="{'invalid': form.errors.has('first_name')}">First Name
+                    </input-field>
+                </div>
+                <div class="row">
+                    <input-field inputType="text"
+                                 name="last_name"
+                                 v-model="form.last_name"
+                                 :error="form.errors.get('last_name')"
+                                 :classes="{'invalid': form.errors.has('last_name')}">Last Name
+                    </input-field>
+                </div>
+                <div class="row">
                     <input-field inputType="password"
                                  name="password"
                                  v-model="form.password"
@@ -51,14 +67,16 @@
                 form: new Form({
                     email: '',
                     password: '',
-                    password_confirmation: ''
+                    password_confirmation: '',
+                    first_name: '',
+                    last_name: ''
                 })
             }
         },
 
         methods: {
             onSubmit() {
-                this.form.post('/auth/register')
+                this.form.post('/api/register')
                     .then(response => {
                         this.$router.push({name: 'verification'});
                     })
