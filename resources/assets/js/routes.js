@@ -3,7 +3,7 @@ import StartComponent from "./components/Start.vue";
 import RegisterForm from './components/forms/Register.vue';
 import LoginForm from './components/forms/Login.vue';
 import VerificationComponent from './components/Verification.vue';
-import EmailConfirmedComponent from './components/EmailConfirmed.vue';
+import VerifyEmailComponent from './components/VerifyEmail.vue';
 import NotFoundComponent from './components/NotFound.vue';
 
 let routes = [
@@ -35,9 +35,9 @@ let routes = [
         }
     },
     {
-        path: '/email-confirmed',
-        name: 'emailConfirmed',
-        component: EmailConfirmedComponent
+        path: '/verify-email/:email_token',
+        name: 'verifyEmail',
+        component: VerifyEmailComponent
     },
     {
         path: '*',
