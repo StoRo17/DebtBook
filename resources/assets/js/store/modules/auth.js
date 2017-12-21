@@ -14,6 +14,10 @@ const getters = {
 
     accessToken (state) {
         return state.accessToken;
+    },
+
+    userId(state) {
+        return state.userId;
     }
 }
 
@@ -43,7 +47,7 @@ const actions = {
     login({ commit }, data) {
         localStorage['user_id'] = data.user_id;
         localStorage['access_token'] = data.tokens.access_token;
-        localStorage['expires_in'] = data.tokens.expires_in;        
+        localStorage['expires_in'] = data.tokens.expires_in;       
         commit(types.SET_TOKEN, data.tokens);
         commit(types.SET_USER_ID, data.user_id);
         commit(types.LOGIN);
