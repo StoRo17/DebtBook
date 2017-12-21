@@ -1,5 +1,5 @@
 <template>
-    <div v-if="loaded">
+    <div>
         <div class="row">
             <div class="col s12 center-align hide-on-large-only">
                 <a href="/" class="waves-light btn" style="margin-top: 10px;">Назад</a>
@@ -55,33 +55,14 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                loaded: false,
-                user: null,
-                profile: null,
-            }
-        },
+import { mapGetters } from 'vuex';
 
-        created() {
-            this.$router.app.$on('user-loaded', (user) => {
-               this.user = user;
-               this.getProfile(user.id);
-            });
-        },
-
-        methods: {
-            getProfile(userId) {
-                axios.get('/users/' + userId + '/profile')
-                    .then(response => {
-                        this.profile = response.data[0];
-                        this.loaded = true;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }
-        }
+export default {
+    computed: {
+        ...mapGetters([
+            'user',
+            'profile'
+        ])
     }
+}
 </script>
