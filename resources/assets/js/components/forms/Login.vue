@@ -53,7 +53,7 @@
                 api.login(this.form.data())
                     .then(response => {
                         this.form.onSuccess();
-                        this.$store.dispatch('login', response.tokens);
+                        this.$store.dispatch('login', response);
                         this.$router.push({name: 'main'})
                     })
                     .catch(error => {
