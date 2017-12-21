@@ -53,6 +53,7 @@
                 api.login(this.form.data())
                     .then(response => {
                         this.form.onSuccess();
+                        this.$store.dispatch('login', response.tokens);
                     })
                     .catch(error => {
                         this.form.onFail(error);
