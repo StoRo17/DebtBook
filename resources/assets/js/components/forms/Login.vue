@@ -54,6 +54,7 @@
                     .then(response => {
                         this.form.onSuccess();
                         this.$store.dispatch('login', response.tokens);
+                        this.$router.push({name: 'main'})
                     })
                     .catch(error => {
                         this.form.onFail(error);
