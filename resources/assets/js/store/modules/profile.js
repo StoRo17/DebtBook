@@ -12,8 +12,8 @@ const mutations = {
 }
 
 const actions = {
-    getProfile({ commit }, profile) {
-        commit(types.SET_PROFILE);
+    setProfile({ commit }, profile) {
+        commit(types.SET_PROFILE, profile);
     }
 }
 
