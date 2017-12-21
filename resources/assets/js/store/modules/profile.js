@@ -5,6 +5,12 @@ const state = {
     profile: {}
 }
 
+const getters = {
+    profile(state) {
+        return state.profile;
+    } 
+}
+
 const mutations = {
     [types.SET_PROFILE](state, profile) {
         state.profile = profile;
@@ -19,6 +25,7 @@ const actions = {
 
 export default {
     state,
+    getters,
     mutations,
     actions
 }
