@@ -65,6 +65,13 @@ class RegisterController extends Controller
     public function verify($token)
     {
         $user = User::where('email_token', $token)->first();
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User with given email token does not exists'
+            ], 422);
+        }
+
         $user->verified = true;
         $user->email_token = null;
 
