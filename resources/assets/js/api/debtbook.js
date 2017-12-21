@@ -10,7 +10,15 @@ export default {
 
     register(data) {
         return post(PREFIX + '/register', data);
+    },
+
+    getUser(userId) {
+        return get(PREFIX + '/users/' + userId);
     }
+}
+
+function get(url, data = '') {
+    return request('get', url);
 }
 
 function post(url, data) {
