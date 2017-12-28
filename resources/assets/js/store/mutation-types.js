@@ -6,3 +6,6 @@ export const SET_USER_ID = 'SET_USER_ID';
 export const SET_USER = 'SET_USER';
 
 export const SET_PROFILE = 'SET_PROFILE';
+
+export const SET_DEBTS = 'SET_DEBTS';
+export const ADD_DEBT = 'ADD_DEBT';
