@@ -6,6 +6,22 @@ import debts from './modules/debts';
 
 
 export default new Vuex.Store({
+    state: {
+        currencies: []
+    },
+
+    mutations: {
+        setCurrencies(state, currencies) {
+            state.currencies = currencies;
+        }
+    },
+
+    getters: {
+        currencies(state) {
+            return state.currencies;
+        }
+    },
+
     modules: {
         auth,
         user,
