@@ -52,6 +52,7 @@
                     .then(response => {
                         this.form.onSuccess();
                         this.$store.dispatch('login', response);
+                        location.reload();
                         this.$router.push({name: 'main'})
                     })
                     .catch(error => {
