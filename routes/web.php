@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('master');
 });
 
-Route::get('/{vue?}', function () { return view('master'); })->where('vue', '[\/\w\.-]*');
+Route::get('/{vue?}', function () { return view('master'); })->where('vue', '.*');
