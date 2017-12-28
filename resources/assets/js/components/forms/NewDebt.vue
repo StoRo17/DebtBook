@@ -55,6 +55,7 @@ import api from '../../api/debtbook';
 import Form from '../../Form';
 import InputField from './InputField.vue';
 import MaterialSelect from './MaterialSelect.vue';
+import { mapGetters } from 'vuex';
 
 export default {
     components: {
@@ -64,7 +65,6 @@ export default {
     
     data() {
         return {
-            currencies: [],
             form: new Form({
                 name: '',
                 amount: '',
@@ -75,14 +75,10 @@ export default {
         }
     },
 
-    mounted() {
-        api.getCurrencies()
-            .then(response => {
-                this.currencies = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+    computed: {
+        ...mapGetters([
+            'currencies'
+        ])
     },
 
     methods: {
