@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const PREFIX = '/api';
 const USERS_PATH = PREFIX + '/users/';
+const DEBTS_PATH = '/debts/';
 
 export default {
     login(data) {
@@ -19,6 +20,10 @@ export default {
 
     getProfile(userId) {
         return get(USERS_PATH + userId + '/profile');
+    },
+
+    createDebt(userId, data) {
+        return post(USERS_PATH + userId + DEBTS_PATH, data);
     },
 
     getCurrencies() {
