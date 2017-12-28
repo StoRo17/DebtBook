@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <template v-show="loaded">
             <div class="row">
                 <h5 class="center-align">{{ message }}</h5>

@@ -3,7 +3,9 @@
         <template v-if="loaded">
             <header-nav></header-nav>
             <main>
-                <router-view></router-view>
+                <div class="container">
+                    <router-view></router-view>
+                </div>
             </main>
         </template>
         <template v-else>
