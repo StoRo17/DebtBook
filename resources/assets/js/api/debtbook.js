@@ -19,6 +19,10 @@ export default {
 
     getProfile(userId) {
         return get(USERS_PATH + userId + '/profile');
+    },
+
+    getCurrencies() {
+        return get(PREFIX + '/currencies');
     }
 }
 
