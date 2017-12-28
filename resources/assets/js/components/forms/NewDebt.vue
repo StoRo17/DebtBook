@@ -87,7 +87,15 @@ export default {
 
     methods: {
         onSubmit() {
-            
+            api.createDebt(this.$store.getters.user.id, this.form.data())
+                .then(response => {
+                    this.form.onSuccess();
+                    this.$store.dispatch('addDebt', response.data);
+                    this.$router.push({ name: 'main'});
+                })
+                .catch(error => {
+                    this.form.onFail(error);
+                })
         }
     }
 }
