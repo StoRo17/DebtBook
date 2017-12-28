@@ -44,11 +44,17 @@ export default {
             api.getUser(this.userId)
                 .then(response => {
                     this.$store.dispatch('setUser', response.data);
-
                     api.getProfile(this.userId)
                         .then(response => {
                             this.$store.dispatch('setProfile', response.data);
-                            this.loaded = true;
+                            api.getCurrencies()
+                                .then(response => {
+                                    this.$store.commit('setCurrencies', response.data);
+                                    this.loaded = true;                                    
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                });
                         })
                         .catch(error => {
                             console.log(error);
