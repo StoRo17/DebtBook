@@ -78,12 +78,16 @@ export default {
     computed: {
         ...mapGetters([
             'currencies'
-        ])
+        ]),
+
+        userId() {
+            return this.$store.getters.user.id;
+        }
     },
 
     methods: {
         onSubmit() {
-            api.createDebt(this.$store.getters.user.id, this.form.data())
+            api.createDebt(this.userId, this.form.data())
                 .then(response => {
                     this.form.onSuccess();
                     this.$store.dispatch('addDebt', response.data);
