@@ -1,6 +1,6 @@
 <template>
     <router-link 
-        :to="{ name: 'debtHistory', params: { id: debt.id }}"
+        :to="{ name: 'debtHistory', params: { debtId: debt.id }}"
         class="collection-item waves-effect">{{ debt.name }}
         <div class="right">{{ getCurrencyById(debt.currency_id) }}&nbsp;{{ debt.total_amount }}
             <i class="material-icons right">keyboard_arrow_right</i>
