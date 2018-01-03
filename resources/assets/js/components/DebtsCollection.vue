@@ -1,38 +1,35 @@
 <template>
     <div class="collection">
         <debt v-for="debt in debts"
-              :key="debt.name"
-              :name="debt.name"
-              :amount="debt.amount"
-              :currency="debt.currency">
+            :key="debt.id"
+            :debt="debt">
         </debt>
     </div>
 </template>
 
 <script>
-    import Debt from './Debt.vue';
+import api from '../api/debtbook';
+import Debt from './Debt.vue';
 
-    export default {
-        components: {
-            'debt': Debt
-        },
+export default {
+    components: {
+        'debt': Debt
+    },
 
-        data () {
-            return {
-                debts: [
-                    {
-                        'name': 'Никита',
-                        'amount': '100',
-                        'currency': '₽'
-                    },
-                    {
-                        'name': 'Андрей',
-                        'amount': '200',
-                        'currency': '$'
-                    }
-                ]
-            }
+    computed: {
+        debts() {
+            return this.$store.getters.debts;
         }
+    },
 
+    mounted() {
+        api.getDebts(this.$store.getters.user.id)
+            .then(response => {
+                this.$store.dispatch('setDebts', response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
+}
 </script>
