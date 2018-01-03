@@ -77,7 +77,8 @@ export default {
 
     computed: {
         ...mapGetters([
-            'currencies'
+            'currencies',
+            'debts'
         ]),
 
         userId() {
@@ -87,15 +88,37 @@ export default {
 
     methods: {
         onSubmit() {
-            api.createDebt(this.userId, this.form.data())
-                .then(response => {
-                    this.form.onSuccess();
-                    this.$store.dispatch('addDebt', response.data);
-                    this.$router.push({ name: 'main'});
-                })
-                .catch(error => {
-                    this.form.onFail(error);
-                })
+            let debt = this.findDebt(this.form);
+            if (debt) {
+                api.createDebtHistory(debt.id, this.form.data())
+                    .then(response => {
+                        this.form.onSuccess();
+                        this.$router.push({ name: 'main'});
+                    })
+                    .catch(error => {
+                        this.form.onFail(error);
+                    })
+            } else {
+                api.createDebt(this.form.data())
+                    .then(response => {
+                        this.form.onSuccess();
+                        this.$store.dispatch('addDebt', response.data);
+                        this.$router.push({ name: 'main'});
+                    })
+                    .catch(error => {
+                        this.form.onFail(error);
+                    })
+            }
+        },
+
+        findDebt(form) {
+            for (let debt of this.debts) {
+                if (form.name == debt.name && form.currency_id == debt.currency_id) {
+                    return debt;
+                }
+            }
+
+            return false;
         }
     }
 }
