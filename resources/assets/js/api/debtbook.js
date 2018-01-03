@@ -4,6 +4,7 @@ import axios from 'axios';
 const PREFIX = '/api';
 const USERS_PATH = PREFIX + '/users/';
 const DEBTS_PATH = '/debts/';
+const DEBTS_HISTORY_PATH = '/history';
 
 export default {
     login(data) {
@@ -22,8 +23,16 @@ export default {
         return get(USERS_PATH + userId + '/profile');
     },
 
-    createDebt(userId, data) {
-        return post(USERS_PATH + userId + DEBTS_PATH, data);
+    getDebts(userId) {
+        return get(USERS_PATH + userId + DEBTS_PATH);
+    },
+
+    createDebt(data) {
+        return post(PREFIX + DEBTS_PATH, data);
+    },
+
+    createDebtHistory(debtId, data) {
+        return post(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH, data);
     },
 
     getCurrencies() {
