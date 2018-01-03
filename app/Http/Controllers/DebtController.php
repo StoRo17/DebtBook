@@ -17,7 +17,7 @@ class DebtController extends Controller
 
     public function index($userId)
     {
-        $debts = $this->debt->where('user_id', $userId)->get();
+        $debts = $this->debt->where('user_id', $userId)->orderBy('name', 'asc')->get();
 
         return DebtResource::collection($debts);
     }
