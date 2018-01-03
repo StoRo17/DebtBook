@@ -102,7 +102,6 @@ export default {
                 api.createDebt(this.form.data())
                     .then(response => {
                         this.form.onSuccess();
-                        this.$store.dispatch('addDebt', response.data);
                         this.$router.push({ name: 'main'});
                     })
                     .catch(error => {
