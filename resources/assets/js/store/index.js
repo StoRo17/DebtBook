@@ -7,12 +7,17 @@ import debts from './modules/debts';
 
 export default new Vuex.Store({
     state: {
+        debtsHistories: {},
         currencies: []
     },
 
     mutations: {
         setCurrencies(state, currencies) {
             state.currencies = currencies;
+        },
+
+        addDebtHistory(state, payload) {
+            state.debtsHistories[payload.debtId] = payload.debtHistory;
         }
     },
 
