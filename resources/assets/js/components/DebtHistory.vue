@@ -36,6 +36,10 @@ export default {
     mounted() {
         api.getDebtHistory(this.debtId)
             .then(response => {
+                this.$store.commit('addDebtHistory', {
+                    debtId: this.debtId,
+                    debtHistory: response.data
+                });
                 this.debtHistory = response.data;
             })
             .catch(error => {
