@@ -26,6 +26,11 @@ class DebtsHistoryController extends Controller
         return DebtsHistoryResource::collection($debtHistory);
     }
 
+    public function show($debtId, $debtHistoryId)
+    {
+        return new DebtsHistoryResource($this->debtsHistory->find($debtHistoryId));
+    }
+
     public function create(DebtsHistoryRequest $request, $debtId)
     {
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
