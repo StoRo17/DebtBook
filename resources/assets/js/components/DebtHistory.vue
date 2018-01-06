@@ -1,9 +1,9 @@
 <template>
     <div>
         <div id="add-debt-btn" class="center">
-        <router-link  :to="{name: 'newDebt'}" class="waves-effect waves-light btn green lighten-1">
+        <a href="#" @click.prevent="deleteDebt" class="waves-effect waves-light btn green lighten-1">
             <i class="material-icons right">delete</i>Удалить всё
-        </router-link>
+        </a>
         </div>
         <ul class="collection with-header">
             <li class="collection-header"><h4>История долга</h4></li>
@@ -64,6 +64,16 @@ export default {
                 historyElementId: historyElementId,
                 elementIndex: elementIndex
             })
+        },
+
+        deleteDebt() {
+            this.$store.dispatch('deleteDebt', this.debtId)
+                .then(() => {   
+                    this.$router.push({ name: 'main'});
+                })
+                .catch(error => {
+
+                });
         }
     }
 }
