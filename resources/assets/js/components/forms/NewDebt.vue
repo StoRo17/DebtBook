@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import api from '../../api/debtbook';
 import Form from '../../Form';
 import InputField from './InputField.vue';
 import MaterialSelect from './MaterialSelect.vue';
@@ -90,23 +89,26 @@ export default {
         onSubmit() {
             let debt = this.findDebt(this.form);
             if (debt) {
-                api.createDebtHistory(debt.id, this.form.data())
-                    .then(response => {
+                this.$store.dispatch('createDebtHistory', {
+                    debtId: debt.id,
+                    data: this.form.data()
+                })
+                    .then(() => {
                         this.form.onSuccess();
                         this.$router.push({ name: 'main'});
                     })
                     .catch(error => {
                         this.form.onFail(error);
-                    })
+                    });
             } else {
-                api.createDebt(this.form.data())
-                    .then(response => {
+                this.$store.dispatch('createDebt', this.form.data())
+                    .then(() => {
                         this.form.onSuccess();
                         this.$router.push({ name: 'main'});
                     })
                     .catch(error => {
                         this.form.onFail(error);
-                    })
+                    });
             }
         },
 
