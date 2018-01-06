@@ -1,4 +1,3 @@
-import api from '../../api/debtbook';
 import * as types from '../mutation-types';
 
 const state = {
@@ -46,18 +45,12 @@ const mutations = {
 
 const actions = {
     login({ commit }, data) {
-        api.login(data)
-            .then(response => {
-                localStorage['user_id'] = response.user_id;
-                localStorage['access_token'] = response.tokens.access_token;
-                localStorage['expires_in'] = response.tokens.expires_in;       
-                commit(types.SET_TOKEN, response.tokens);
-                commit(types.SET_USER_ID, response.user_id);
-                commit(types.LOGIN);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        localStorage['user_id'] = data.user_id;
+        localStorage['access_token'] = data.tokens.access_token;
+        localStorage['expires_in'] = data.tokens.expires_in;       
+        commit(types.SET_TOKEN, data.tokens);
+        commit(types.SET_USER_ID, data.user_id);
+        commit(types.LOGIN);
     },
 
     logout({ commit }) {
