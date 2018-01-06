@@ -39,6 +39,10 @@ export default {
         return post(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH, data);
     },
 
+    deleteDebt(debtId) {
+        return del(PREFIX + DEBTS_PATH + debtId);
+    },
+
     deleteDebtHistory(debtId, debtHistoryId) {
         return del(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH + debtHistoryId);
     },
