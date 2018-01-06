@@ -48,10 +48,9 @@
 
         methods: {
             onSubmit() {
-                api.login(this.form.data())
-                    .then(response => {
+                this.$store.dispatch('login', this.form.data())
+                    .then(() => {
                         this.form.onSuccess();
-                        this.$store.dispatch('login', response);
                         location.reload();
                         this.$router.push({name: 'main'})
                     })

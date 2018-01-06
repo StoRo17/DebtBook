@@ -46,18 +46,21 @@ const mutations = {
 
 const actions = {
     login({ commit }, data) {
-        api.login(data)
-            .then(response => {
-                localStorage['user_id'] = response.user_id;
-                localStorage['access_token'] = response.tokens.access_token;
-                localStorage['expires_in'] = response.tokens.expires_in;       
-                commit(types.SET_TOKEN, response.tokens);
-                commit(types.SET_USER_ID, response.user_id);
-                commit(types.LOGIN);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        return new Promise((resolve, reject) => {
+            api.login(data)
+                .then(response => {
+                    localStorage['user_id'] = response.user_id;
+                    localStorage['access_token'] = response.tokens.access_token;
+                    localStorage['expires_in'] = response.tokens.expires_in;       
+                    commit(types.SET_TOKEN, response.tokens);
+                    commit(types.SET_USER_ID, response.user_id);
+                    commit(types.LOGIN);
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        }) 
     },
 
     logout({ commit }) {
