@@ -33,10 +33,6 @@ const mutations = {
 
     [types.UPDATE_DEBTS](state) {
         state.loaded = false;
-    },
-
-    [types.ADD_DEBT](state, debt) {
-        state.debts.push(debt);
     }
 }
 
@@ -71,8 +67,18 @@ const actions = {
         })
     },
 
-    addDebt({ commit }, debt) {
-        commit(types.ADD_DEBT, debt);
+    deleteDebt({ commit }, debtId) {
+        return new Promise((resolve, reject) => {
+            api.deleteDebt(debtId)
+            .then(response => {
+                commit(types.UPDATE_DEBTS);
+                resolve();
+            })
+            .catch(error => {
+                console.log(error);
+                reject(error);
+            });
+        });
     }
 }
 
