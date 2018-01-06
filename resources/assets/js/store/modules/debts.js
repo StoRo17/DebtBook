@@ -37,19 +37,21 @@ const mutations = {
 }
 
 const actions = {
-    loadDebts({ commit }, userId) {
-        commit(types.SET_LOADING, true);
-        api.getDebts(userId)
-            .then(response => {
-                commit(types.SET_DEBTS, response.data);
-                commit(types.DEBTS_LOADED);
-                commit(types.SET_LOADING, false);
-            })
-            .catch(error => {
-                console.log(error);
-                commit(types.ERROR);
-                commit(types.SET_LOADING, false);
-            });
+    loadDebts({ state, commit }, userId) {
+        if (!state.loaded) {
+            commit(types.SET_LOADING, true);
+            api.getDebts(userId)
+                .then(response => {
+                    commit(types.SET_DEBTS, response.data);
+                    commit(types.DEBTS_LOADED);
+                    commit(types.SET_LOADING, false);
+                })
+                .catch(error => {
+                    console.log(error);
+                    commit(types.ERROR);
+                    commit(types.SET_LOADING, false);
+                });
+        }
     },
 
     createDebt({ commit }, data) {
