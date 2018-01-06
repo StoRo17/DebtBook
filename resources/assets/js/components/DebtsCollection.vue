@@ -8,28 +8,28 @@
 </template>
 
 <script>
-import api from '../api/debtbook';
+import { mapGetters } from 'vuex';
 import Debt from './Debt.vue';
 
 export default {
     components: {
-        'debt': Debt
+        Debt
     },
 
     computed: {
-        debts() {
-            return this.$store.getters.debts;
-        }
+        ...mapGetters([
+            'debts',
+            'currencies',
+            'isLoggedIn',
+            'userId'
+        ])
     },
 
     mounted() {
-        api.getDebts(this.$store.getters.user.id)
-            .then(response => {
-                this.$store.dispatch('setDebts', response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        if (this.isLoggedIn) {
+            this.$store.dispatch('loadCurrencies', this.userId);
+            this.$store.dispatch('loadDebts', this.userId);
+        }
     }
 }
 </script>
