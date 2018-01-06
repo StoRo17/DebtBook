@@ -1,19 +1,28 @@
 <template>
-    <div class="collection">
-        <debt v-for="debt in debts"
-            :key="debt.id"
-            :debt="debt">
-        </debt>
+    <div>
+        <template v-if="!this.$store.state.debts.loading">
+            <div class="collection">
+                <debt v-for="debt in debts"
+                    :key="debt.id"
+                    :debt="debt">
+                </debt>
+            </div>
+        </template>
+        <template v-else>
+            <spinner size="big"></spinner>
+        </template>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import Spinner from 'vue-simple-spinner';
 import Debt from './Debt.vue';
 
 export default {
     components: {
-        Debt
+        Debt,
+        Spinner
     },
 
     computed: {
