@@ -1,3 +1,7 @@
+export const LOADING_START = 'LOADING_START';
+export const LOADING_STOP = 'LOADING_STOP';
+export const ERROR = 'ERROR';
+
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
