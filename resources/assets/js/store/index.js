@@ -4,14 +4,14 @@ import auth from './modules/auth';
 import user from './modules/user';
 import profile from  './modules/profile';
 import debts from './modules/debts';
+import currencies from './modules/currencies';
 
 
 export default new Vuex.Store({
     state: {
         loading: false,
         error: false,
-        debtsHistories: {},
-        currencies: []
+        debtsHistories: {}
     },
 
     mutations: {
@@ -27,10 +27,6 @@ export default new Vuex.Store({
             state.error = true;
         },
 
-        setCurrencies(state, currencies) {
-            state.currencies = currencies;
-        },
-
         addDebtHistory(state, payload) {
             state.debtsHistories[payload.debtId] = payload.debtHistory;
         }
@@ -43,10 +39,6 @@ export default new Vuex.Store({
 
         error(state) {
             return state.error;
-        },
-
-        currencies(state) {
-            return state.currencies;
         }
     },
 
@@ -54,6 +46,7 @@ export default new Vuex.Store({
         auth,
         user,
         profile,
-        debts
+        debts,
+        currencies
     }
 });
