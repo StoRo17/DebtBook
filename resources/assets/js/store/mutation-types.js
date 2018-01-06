@@ -24,6 +24,7 @@ export const SET_LOADING = 'SET_LOADING';
 
 //debt history mutation
 export const SET_DEBT_HISTORY = 'SET_DEBT_HISTORY';
+export const DELETE_DEBT_HISTORY_ELEMENT = 'DELETE_DEBT_HISTORY_ELEMENT';
 
 //currencies mutations
 export const SET_CURRENCIES = 'SET_CURRENCIES';

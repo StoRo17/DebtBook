@@ -20,6 +20,10 @@ const mutations = {
 
     [types.SET_DEBT_HISTORY](state, data) {
         state.debtHistory = data;
+    },
+
+    [types.DELETE_DEBT_HISTORY_ELEMENT](state, elementIndex) {
+        Vue.delete(state.debtHistory, elementIndex);
     }
 }
 
@@ -49,7 +53,18 @@ const actions = {
                     reject(error);
                 });
         });
-    } 
+    },
+
+    deleteDebtHistoryElement({ state, commit }, payload) {
+        api.deleteDebtHistory(payload.debtId, payload.historyElementId)
+            .then(response => {
+                commit(types.DELETE_DEBT_HISTORY_ELEMENT, payload.elementIndex)
+                commit(types.UPDATE_DEBTS);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 }
 
 export default {
