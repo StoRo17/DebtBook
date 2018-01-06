@@ -23,3 +23,4 @@ export const ADD_DEBT = 'ADD_DEBT';
 
 //currencies mutations
 export const SET_CURRENCIES = 'SET_CURRENCIES';
+export const CURRENCIES_LOADED = 'CURRENCIES_LOADED';
