@@ -80,8 +80,20 @@ export default {
             'debts'
         ]),
 
+        ...mapGetters({
+            isDebtsLoaded: 'loaded',
+            isCurrenciesLoaded: 'isLoaded'
+        }),
+
         userId() {
             return this.$store.getters.user.id;
+        }
+    },
+
+    mounted() {
+        if (!(this.isDebtsLoaded && this.isCurrenciesLoaded)) {
+            this.$store.dispatch('loadCurrencies', this.userId);
+            this.$store.dispatch('loadDebts', this.userId);
         }
     },
 
