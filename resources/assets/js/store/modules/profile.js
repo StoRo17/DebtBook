@@ -1,3 +1,4 @@
+import api from '../../api/debtbook';
 import * as types from '../mutation-types';
 
 
@@ -18,8 +19,18 @@ const mutations = {
 }
 
 const actions = {
-    setProfile({ commit }, profile) {
-        commit(types.SET_PROFILE, profile);
+    loadProfile({ commit }, userId) {
+        commit(types.LOADING_START);
+        api.getProfile(userId)
+            .then(response => {
+                commit(types.SET_PROFILE, response.data);
+                commit(types.LOADING_STOP);
+            })
+            .catch(error => {
+                console.log(error);
+                commit(types.ERROR);
+                commit(types.LOADING_STOP);
+            });
     }
 }
 
