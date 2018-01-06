@@ -1,8 +1,10 @@
+import api from '../../api/debtbook';
 import * as types from '../mutation-types';
 
 
 const state = {
-    debts: []
+    debts: [],
+    loaded: false,
 }
 
 const getters = {
@@ -16,14 +18,30 @@ const mutations = {
         state.debts = debts;
     },
 
+    [types.DEBTS_LOADED](state) {
+        this.loaded = true;
+    },
+
+    [types.UPDATE_DEBTS](state) {
+        this.loaded = false;
+    },
+
     [types.ADD_DEBT](state, debt) {
         state.debts.push(debt);
     }
 }
 
 const actions = {
-    setDebts({ commit }, debts) {
-        commit(types.SET_DEBTS, debts);
+    loadDebts({ commit }, userId) {
+        api.getDebts(userId)
+            .then(response => {
+                commit(types.SET_DEBTS, response.data);
+                commit(types.DEBTS_LOADED);
+            })
+            .catch(error => {
+                console.log(error);
+                commit(types.ERROR);
+            });
     },
 
     addDebt({ commit }, debt) {
