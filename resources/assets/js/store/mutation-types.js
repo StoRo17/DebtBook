@@ -22,6 +22,9 @@ export const UPDATE_DEBTS = 'UPDATE_DEBTS';
 export const ADD_DEBT = 'ADD_DEBT';
 export const SET_LOADING = 'SET_LOADING';
 
+//debt history mutation
+export const SET_DEBT_HISTORY = 'SET_DEBT_HISTORY';
+
 //currencies mutations
 export const SET_CURRENCIES = 'SET_CURRENCIES';
 export const CURRENCIES_LOADED = 'CURRENCIES_LOADED';
