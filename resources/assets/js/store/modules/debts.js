@@ -4,6 +4,7 @@ import * as types from '../mutation-types';
 
 const state = {
     debts: [],
+    loading: false,
     loaded: false,
 }
 
@@ -16,6 +17,10 @@ const getters = {
 const mutations = {
     [types.SET_DEBTS](state, debts) {
         state.debts = debts;
+    },
+
+    [types.SET_LOADING](state, bool) {
+        state.loading = bool
     },
 
     [types.DEBTS_LOADED](state) {
@@ -33,15 +38,31 @@ const mutations = {
 
 const actions = {
     loadDebts({ commit }, userId) {
+        commit(types.SET_LOADING, true);
         api.getDebts(userId)
             .then(response => {
                 commit(types.SET_DEBTS, response.data);
                 commit(types.DEBTS_LOADED);
+                commit(types.SET_LOADING, false);
             })
             .catch(error => {
                 console.log(error);
                 commit(types.ERROR);
+                commit(types.SET_LOADING, false);
             });
+    },
+
+    createDebt({ commit }, data) {
+        return new Promise((resolve, reject) => {
+            api.createDebt(data)
+                .then(response => {
+                    commit(types.UPDATE_DEBTS);
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error);
+                })
+        })
     },
 
     addDebt({ commit }, debt) {

@@ -20,6 +20,7 @@ export const SET_DEBTS = 'SET_DEBTS';
 export const DEBTS_LOADED = 'DEBTS_LOADED';
 export const UPDATE_DEBTS = 'UPDATE_DEBTS';
 export const ADD_DEBT = 'ADD_DEBT';
+export const SET_LOADING = 'SET_LOADING';
 
 //currencies mutations
 export const SET_CURRENCIES = 'SET_CURRENCIES';
