@@ -1,12 +1,15 @@
 <template>
     <div id="app">
-        <template v-if="loaded">
+        <template v-if="!loading">
             <header-nav></header-nav>
             <main>
                 <div class="container">
                     <router-view></router-view>
                 </div>
             </main>
+        </template>
+        <template v-else-if="error">
+            <h2>Error. Try again later please</h2>
         </template>
         <template v-else>
             <spinner size="massive"></spinner>
@@ -17,16 +20,9 @@
 <script>
 import { mapGetters } from 'vuex';
 import Spinner from 'vue-simple-spinner';
-import api from './api/debtbook';
 import HeaderNav from './components/Header.vue';
 
 export default {
-    data() {
-        return {
-            loaded: false
-        }
-    },
-
     components: {
         HeaderNav,
         Spinner
@@ -34,6 +30,8 @@ export default {
 
     computed: {
         ...mapGetters([
+            'loading',
+            'error',
             'isLoggedIn',
             'userId'
         ])
@@ -41,28 +39,8 @@ export default {
 
     created() {
         if (this.isLoggedIn) {
-            api.getUser(this.userId)
-                .then(response => {
-                    this.$store.dispatch('setUser', response.data);
-                    api.getProfile(this.userId)
-                        .then(response => {
-                            this.$store.dispatch('setProfile', response.data);
-                            api.getCurrencies()
-                                .then(response => {
-                                    this.$store.commit('setCurrencies', response.data);
-                                    this.loaded = true;                                    
-                                })
-                                .catch(error => {
-                                    console.log(error);
-                                });
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        })
-                })
-                .catch(error => {
-                    console.log(error);
-                })
+            this.$store.dispatch('loadUser', this.userId);
+            this.$store.dispatch('loadProfile', this.userId);
         }
     }
 }
