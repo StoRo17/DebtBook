@@ -24,11 +24,11 @@ const mutations = {
     },
 
     [types.DEBTS_LOADED](state) {
-        this.loaded = true;
+        state.loaded = true;
     },
 
     [types.UPDATE_DEBTS](state) {
-        this.loaded = false;
+        state.loaded = false;
     },
 
     [types.ADD_DEBT](state, debt) {
