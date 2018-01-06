@@ -1,61 +1,69 @@
 <template>
-    <ul class="collection with-header">
-        <li class="collection-header"><h4>История долга</h4></li>
-        <li class="collection-item" v-for="(history, index) in debtHistory"> 
-            <div>
-                <template v-if="history.type == 'take'">
-                    -{{ history.amount }}
-                </template>
-                <template v-else>
-                    {{ history.amount }}
-                </template>
-                &nbsp;&nbsp;&nbsp;&nbsp;{{ history.comment }}
-                <a :href="history.id" @click.prevent="deleteHistory(history.id, index)" class="secondary-content"><i class="material-icons">delete</i></a>
-                <a :href="history.id" class="secondary-content"><i class="material-icons">edit</i></a>                
-            </div>
-        </li>
-      </ul>
+    <div>
+        <div id="add-debt-btn" class="center">
+        <router-link  :to="{name: 'newDebt'}" class="waves-effect waves-light btn green lighten-1">
+            <i class="material-icons right">delete</i>Удалить всё
+        </router-link>
+        </div>
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>История долга</h4></li>
+            <template v-if="!this.$store.state.debtHistory.loading">
+                <li class="collection-item" v-for="(history, index) in debtHistory"> 
+                <div>
+                    <template v-if="history.type == 'take'">
+                        -{{ history.amount }}
+                    </template>
+                    <template v-else>
+                        {{ history.amount }}
+                    </template>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{ history.comment }}
+                    <a  :href="history.id"
+                        @click.prevent="deleteHistoryElement(history.id, index)" 
+                        class="secondary-content">
+                        <i class="material-icons">delete</i></a>
+                    <router-link :to="{ name: 'editDebtHistory', params: { debtId: debtId, debtHistoryId: history.id }}"
+                        class="secondary-content">
+                        <i class="material-icons">edit</i>
+                    </router-link>
+                    </div>
+                </li>
+            </template>
+            <template v-else>
+                <spinner size="big"></spinner>
+            </template>
+        </ul>
+    </div>
 </template>
 
 <script>
-import api from '../api/debtbook';
+import Spinner from 'vue-simple-spinner';
 
 export default {
-    data() {
-        return {
-            debtHistory: []
-        }
+    components: {
+        Spinner
     },
 
     computed: {
         debtId() {
             return this.$route.params.debtId;
+        },
+
+        debtHistory() {
+            return this.$store.getters.debtHistory;
         }
     },
 
     mounted() {
-        api.getDebtHistory(this.debtId)
-            .then(response => {
-                this.$store.commit('addDebtHistory', {
-                    debtId: this.debtId,
-                    debtHistory: response.data
-                });
-                this.debtHistory = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        this.$store.dispatch('loadDebtHistory', this.debtId);
     },
 
     methods: {
-        deleteHistory(historyId, historyIndex) {
-            api.deleteDebtHistory(this.debtId, historyId)
-                .then(response => {
-                    Vue.delete(this.debtHistory, historyIndex);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+        deleteHistoryElement(historyElementId, elementIndex) {
+            this.$store.dispatch('deleteDebtHistoryElement', {
+                debtId: this.debtId,
+                historyElementId: historyElementId,
+                elementIndex: elementIndex
+            })
         }
     }
 }
