@@ -11,6 +11,10 @@ const state = {
 const getters = {
     debts(state) {
         return state.debts;
+    },
+
+    loaded(state) {
+        return state.loaded;
     }
 }
 

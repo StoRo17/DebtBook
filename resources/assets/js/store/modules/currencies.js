@@ -9,6 +9,10 @@ const state = {
 const getters = {
     currencies(state) {
         return state.currencies;
+    },
+
+    isLoaded(state) {
+        return state.loaded;
     }
 }
 
