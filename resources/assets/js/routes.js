@@ -49,7 +49,7 @@ let routes = [
         component: VerificationComponent,
         beforeEnter: (to, from, next) => {
             if (from.name != 'register') {
-                next({name: 'start'});
+                next({name: 'main'});
             } else {
                 next();
             }
