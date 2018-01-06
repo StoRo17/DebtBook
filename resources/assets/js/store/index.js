@@ -4,6 +4,7 @@ import auth from './modules/auth';
 import user from './modules/user';
 import profile from  './modules/profile';
 import debts from './modules/debts';
+import debtHistory from './modules/debtHistory';
 import currencies from './modules/currencies';
 
 
@@ -11,7 +12,6 @@ export default new Vuex.Store({
     state: {
         loading: false,
         error: false,
-        debtsHistories: {}
     },
 
     mutations: {
@@ -25,10 +25,6 @@ export default new Vuex.Store({
 
         [types.ERROR](state) {
             state.error = true;
-        },
-
-        addDebtHistory(state, payload) {
-            state.debtsHistories[payload.debtId] = payload.debtHistory;
         }
     },
 
@@ -47,6 +43,7 @@ export default new Vuex.Store({
         user,
         profile,
         debts,
-        currencies
+        currencies,
+        debtHistory
     }
 });
