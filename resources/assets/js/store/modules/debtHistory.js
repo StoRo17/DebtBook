@@ -42,6 +42,19 @@ const actions = {
             });
     }, 
 
+    loadDebtHistoryElement({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            api.getDebtHistoryElement(payload.debtId, payload.debtHistoryId)
+                .then(response => {
+                    commit(types.SET_DEBT_HISTORY, response.data);
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });            
+    },
+
     createDebtHistory({ commit }, payload) {
         return new Promise((resolve, reject) => {
             api.createDebtHistory(payload.debtId, payload.data)
