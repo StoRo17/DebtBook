@@ -17,6 +17,7 @@ return [
     'logout' => 'Logout',
     'password' => 'Password',
     'password_confirmation' => 'Password confirmation',
+    'change_password' => 'Change password',
     'submit' => 'Submit',
     'verification_message' => 'A verification email has been sent to your email address',
     'failed' => 'These credentials do not match our records.',

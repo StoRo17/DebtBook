@@ -17,6 +17,7 @@ return [
     'logout' => 'Выйти',
     'password' => 'Пароль',
     'password_confirmation' => 'Подтверждение пароля',
+    'change_password' => 'Сменить пароль',
     'submit' => 'Отправить',
     'verification_message' => 'Письмо для подтверждения аккаунта отправлено на ваш email адрес',
     'failed'   => 'Имя пользователя и пароль не совпадают.',
