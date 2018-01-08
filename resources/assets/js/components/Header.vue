@@ -7,7 +7,6 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <template v-if="isLoggedIn">
                         <li><router-link :to="{name: 'profile'}">{{ fullName }}</router-link></li>
-                        <img :src="profile.avatar" class="circle">
                     </template>
                     <template v-else>
                         <li><router-link :to="{name: 'login'}">{{ 'auth.sign_in' | trans }}</router-link></li>

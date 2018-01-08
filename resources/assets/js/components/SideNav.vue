@@ -3,7 +3,6 @@
         <li>
             <div class="user-view">
                 <div class="background green"></div>
-                <router-link to="/" exact><img class="circle responsive-img" :src="profile.avatar"></router-link>
                 <router-link to="/" exact><span class="white-text name">{{ fullName }}</span></router-link>
                 <router-link to="/" exact><span class="white-text email">{{ user.email }}</span></router-link>
             </div>

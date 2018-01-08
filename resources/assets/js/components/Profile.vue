@@ -1,12 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <div class="col s12 m6 l3">
-                <div class="center-align">
-                    <img class="circle responsive-img" :src="profile.avatar">
-                </div>
-            </div>
-            <div class="col s12 m6 l9">
+            <div class="col s12">
                 <ul class="collection with-header">
                     <li class="collection-header"><h4>Профиль</h4></li>
                     <li class="collection-item">Email: {{ user.email }}</li>
@@ -16,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s12 offset-l3 l9">
+            <div class="col s12">
                 <div class="row">
                     <div class="right-align hide-on-med-and-down">
                         <a href="" class="waves-light btn">Изменить данные</a>
