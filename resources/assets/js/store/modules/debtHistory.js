@@ -4,7 +4,6 @@ import * as types from '../mutation-types';
 
 const state = {
     loading: false,
-    loaded: false,
     debtHistory: []
 }
 
@@ -23,14 +22,6 @@ const mutations = {
         state.debtHistory = data;
     },
 
-    [types.DEBT_HISTORY_LOADED](state) {
-        state.loaded = true;
-    },
-
-    [types.UPDATE_DEBT_HISTORY](state) {
-        state.loaded = false;
-    },
-
     [types.DELETE_DEBT_HISTORY_ELEMENT](state, elementIndex) {
         Vue.delete(state.debtHistory, elementIndex);
     }
@@ -38,20 +29,17 @@ const mutations = {
 
 const actions = {
     loadDebtHistory({ state, commit }, debtId) {
-        if (!state.loaded) {
-            commit(types.SET_LOADING, true);
-            api.getDebtHistory(debtId)
-                .then(response => {
-                    commit(types.SET_DEBT_HISTORY, response.data);
-                    commit(types.DEBT_HISTORY_LOADED);                    
-                    commit(types.SET_LOADING, false);
-                })
-                .catch(error => {
-                    console.log(error);
-                    commit(types.ERROR);
-                    commit(types.SET_LOADING, false);
-                });
-        }
+        commit(types.SET_LOADING, true);
+        api.getDebtHistory(debtId)
+            .then(response => {
+                commit(types.SET_DEBT_HISTORY, response.data);
+                commit(types.SET_LOADING, false);
+            })
+            .catch(error => {
+                console.log(error);
+                commit(types.ERROR);
+                commit(types.SET_LOADING, false);
+            });
     }, 
 
     loadDebtHistoryElement({ commit }, payload) {
@@ -73,6 +61,19 @@ const actions = {
                 .then(response => {
                     commit(types.UPDATE_DEBTS);
                     resolve();
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    },
+    
+    updateDebtHistoryElement({ state, commit }, payload) {
+        return new Promise((resolve, reject) => {
+            api.updateDebtHistoryElement(payload.debtId, payload.historyElementId, payload.data)
+                .then(response => {
+                    commit(types.UPDATE_DEBTS);
+                    resolve(response.data);
                 })
                 .catch(error => {
                     reject(error);
