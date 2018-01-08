@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
 import MainComponent from "./components/Main.vue";
 import ProfileComponent from "./components/Profile.vue";
+import EditProfileComponent from './components/forms/EditProfile.vue';
 import NewDebtComponent from "./components/forms/NewDebt.vue";
 import DebtHistoryComponent from "./components/DebtHistory.vue";
 import EditDebtHistoryComponent from "./components/forms/EditDebtHistory.vue";
@@ -21,6 +22,12 @@ let routes = [
         name: 'profile',
         component: ProfileComponent,
         meta: { requiresAuth: true}
+    },
+    {
+        path: '/profile/edit',
+        name: 'editProfile',
+        component: EditProfileComponent,
+        meta: { requiresAuth: true }
     },
     {
         path: '/new-debt',
