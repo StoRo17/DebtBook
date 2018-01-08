@@ -54,6 +54,18 @@ const actions = {
         }
     },
 
+    loadDebt({ commit }, debtId) {
+        return new Promise((resolve, reject) => {
+            api.getDebt(debtId)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        })        
+    },
+
     createDebt({ commit }, data) {
         return new Promise((resolve, reject) => {
             api.createDebt(data)
