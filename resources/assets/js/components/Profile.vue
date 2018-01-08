@@ -1,11 +1,6 @@
 <template>
     <div>
         <div class="row">
-            <div class="col s12 center-align hide-on-large-only">
-                <a href="/" class="waves-light btn" style="margin-top: 10px;">Назад</a>
-            </div>
-        </div>
-        <div class="row">
             <div class="col s12 m6 l3">
                 <div class="center-align">
                     <img class="circle responsive-img" :src="profile.avatar">
@@ -21,19 +16,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s12 l3 hide-on-med-and-down">
-                <div class="row">
-                    <div class="center-align">
-                        <a href="/" class="waves-light btn">Назад</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 l9">
+            <div class="col s12 offset-l3 l9">
                 <div class="row">
                     <div class="right-align hide-on-med-and-down">
                         <a href="" class="waves-light btn">Изменить данные</a>
                         <a href="" class="waves-light btn">Сменить пароль</a>
-                        <a href="" class="waves-light btn">Выход</a>
+                        <a href="" @click.prevent="logout" class="waves-light btn">Выход</a>
                     </div>
                 </div>
                 <div class="col s12 hide-on-large-only center-align">
@@ -46,7 +34,7 @@
                     <div class="row">
                     </div>
                     <div class="row">
-                        <a href="/" class="waves-light btn">Выход</a>
+                        <a href="" @click.prevent="logout" class="waves-light btn">Выход</a>
                     </div>
                 </div>
             </div>
@@ -63,6 +51,14 @@ export default {
             'user',
             'profile'
         ])
+    },
+
+    methods: {
+        logout() {
+            this.$store.dispatch('logout');
+            location.reload();
+            this.$router.push({name: 'main'})
+        }
     }
 }
 </script>

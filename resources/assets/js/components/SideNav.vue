@@ -10,7 +10,7 @@
         </li>
         <li><router-link :to="{name: 'profile'}" class="waves-effect"><i class="material-icons">assignment_ind</i>Профиль</router-link></li>
         <li><div class="divider"></div></li>
-        <li><router-link to="/logout">{{ 'auth.logout' | trans }}</router-link></li>
+        <li><a href="" @click.prevent="logout" >{{ 'auth.logout' | trans }}</a></li>
     </div>
 </template>
 
@@ -27,6 +27,14 @@ export default {
             'user',
             'profile'
         ])
+    },
+
+    methods: {
+        logout() {
+            this.$store.dispatch('logout');
+            location.reload();
+            this.$router.push({name: 'main'})
+        }
     }
 }
 </script>
