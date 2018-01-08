@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import Form from '../../Form';
+
 export default {
     data() {
         return {
@@ -29,6 +31,22 @@ export default {
                 first_name: '',
                 last_name: '',
             })
+        }
+    },
+
+    methods: {
+        onSubmit() {
+            this.$store.dispatch('updateProfile', {
+                userId: this.$store.getters.user.id,
+                data: this.form.data()
+            })
+                .then(response => {
+                    this.form.onSuccess();
+                    this.$router.push({name: 'profile'});
+                })
+                .catch(error => {
+                    this.form.onFail(error);
+                })
         }
     }
 }

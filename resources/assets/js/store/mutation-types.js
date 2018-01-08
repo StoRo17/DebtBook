@@ -14,6 +14,8 @@ export const SET_USER = 'SET_USER';
 
 //profile mutations
 export const SET_PROFILE = 'SET_PROFILE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const PROFILE_UPDATED = 'PROFILE_UPDATED';
 
 //debts mutations
 export const SET_DEBTS = 'SET_DEBTS';
