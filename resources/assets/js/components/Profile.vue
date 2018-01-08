@@ -14,14 +14,14 @@
             <div class="col s12">
                 <div class="row">
                     <div class="right-align hide-on-med-and-down">
-                        <a href="" class="waves-light btn">Изменить данные</a>
+                        <router-link :to="{name: 'editProfile'}" class="waves-light btn">Изменить данные</router-link>
                         <a href="" class="waves-light btn">Сменить пароль</a>
                         <a href="" @click.prevent="logout" class="waves-light btn">Выход</a>
                     </div>
                 </div>
                 <div class="col s12 hide-on-large-only center-align">
                     <div class="row">
-                        <a href="" class="waves-light btn">Изменить данные</a>
+                        <router-link :to="{name: 'editProfile'}" class="waves-light btn">Изменить данные</router-link>
                     </div>
                     <div class="row">
                         <a href="" class="waves-light btn">Сменить пароль</a>
@@ -44,8 +44,15 @@ export default {
     computed: {
         ...mapGetters([
             'user',
-            'profile'
+            'profile',
+            'profileUpdated'
         ])
+    },
+
+    mounted() {
+        if (!this.profileUpdated) {
+            this.$store.dispatch('loadProfile');
+        }
     },
 
     methods: {
