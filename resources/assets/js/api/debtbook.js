@@ -27,8 +27,16 @@ export default {
         return get(USERS_PATH + userId + DEBTS_PATH);
     },
 
+    getDebt(debtId) {
+        return get(PREFIX + DEBTS_PATH + debtId);
+    },
+
     getDebtHistory(debtId) {
         return get(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH);
+    },
+
+    getDebtHistoryElement(debtId, debtHistoryElementId) {
+        return get(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH + debtHistoryElementId);
     },
 
     createDebt(data) {
