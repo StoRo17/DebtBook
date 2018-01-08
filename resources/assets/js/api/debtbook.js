@@ -39,6 +39,10 @@ export default {
         return get(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH + debtHistoryElementId);
     },
 
+    updateDebtHistoryElement(debtId, debtHistoryElementId, data) {
+        return put(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH + debtHistoryElementId, data);        
+    },
+
     createDebt(data) {
         return post(PREFIX + DEBTS_PATH, data);
     },
