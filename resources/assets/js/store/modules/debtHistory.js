@@ -4,6 +4,7 @@ import * as types from '../mutation-types';
 
 const state = {
     loading: false,
+    loaded: false,
     debtHistory: []
 }
 
@@ -22,24 +23,35 @@ const mutations = {
         state.debtHistory = data;
     },
 
+    [types.DEBT_HISTORY_LOADED](state) {
+        state.loaded = true;
+    },
+
+    [types.UPDATE_DEBT_HISTORY](state) {
+        state.loaded = false;
+    },
+
     [types.DELETE_DEBT_HISTORY_ELEMENT](state, elementIndex) {
         Vue.delete(state.debtHistory, elementIndex);
     }
 }
 
 const actions = {
-    loadDebtHistory({ commit }, debtId) {
-        commit(types.SET_LOADING, true);
-        api.getDebtHistory(debtId)
-            .then(response => {
-                commit(types.SET_DEBT_HISTORY, response.data);
-                commit(types.SET_LOADING, false);
-            })
-            .catch(error => {
-                console.log(error);
-                commit(types.ERROR);
-                commit(types.SET_LOADING, false);
-            });
+    loadDebtHistory({ state, commit }, debtId) {
+        if (!state.loaded) {
+            commit(types.SET_LOADING, true);
+            api.getDebtHistory(debtId)
+                .then(response => {
+                    commit(types.SET_DEBT_HISTORY, response.data);
+                    commit(types.DEBT_HISTORY_LOADED);                    
+                    commit(types.SET_LOADING, false);
+                })
+                .catch(error => {
+                    console.log(error);
+                    commit(types.ERROR);
+                    commit(types.SET_LOADING, false);
+                });
+        }
     }, 
 
     loadDebtHistoryElement({ commit }, payload) {
