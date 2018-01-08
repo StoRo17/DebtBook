@@ -31,6 +31,18 @@ const actions = {
                 commit(types.ERROR);
                 commit(types.LOADING_STOP);
             });
+    },
+
+    updateProfile({ commit }, userId) {
+        return new Promise((resolve, reject) => { 
+            api.editProfile(userId)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
     }
 }
 

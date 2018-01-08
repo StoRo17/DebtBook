@@ -23,6 +23,10 @@ export default {
         return get(USERS_PATH + userId + '/profile');
     },
 
+    editProfile(userId) {
+        return put(USERS_PATH + userId + '/profile');
+    },
+
     getDebts(userId) {
         return get(USERS_PATH + userId + DEBTS_PATH);
     },
