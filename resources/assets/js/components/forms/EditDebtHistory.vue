@@ -21,8 +21,8 @@
             <label for="take">Take</label>
         </div>
         <div class="row center-align">
-            <button class="btn waves-effect waves-light" name="submit">Add debt
-                <i class="material-icons right">add</i>
+            <button class="btn waves-effect waves-light" name="submit">Edit debt
+                <i class="material-icons right">edit</i>
             </button>
         </div>
     </form>
