@@ -2,11 +2,11 @@
     <div>
         <div id="add-debt-btn" class="center">
         <a href="#" @click.prevent="deleteDebt" class="waves-effect waves-light btn green lighten-1">
-            <i class="material-icons right">delete</i>Удалить всё
+            <i class="material-icons right">delete</i>{{ 'debts.delete_all' | trans }}
         </a>
         </div>
         <ul class="collection with-header">
-            <li class="collection-header"><h4>История долга</h4></li>
+            <li class="collection-header"><h4>{{ 'debts.debt_history' | trans }}</h4></li>
             <template v-if="!this.$store.state.debtHistory.loading">
                 <li class="collection-item" v-for="(history, index) in debtHistory"> 
                 <div>

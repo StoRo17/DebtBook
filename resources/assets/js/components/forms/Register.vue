@@ -15,7 +15,7 @@
                                 name="first_name"
                                 v-model="form.first_name"
                                 :error="form.errors.get('first_name')"
-                                :classes="{'invalid': form.errors.has('first_name')}">First Name
+                                :classes="{'invalid': form.errors.has('first_name')}">{{ 'profile.first_name' | trans }}
                 </input-field>
             </div>
             <div class="row">
@@ -23,7 +23,7 @@
                                 name="last_name"
                                 v-model="form.last_name"
                                 :error="form.errors.get('last_name')"
-                                :classes="{'invalid': form.errors.has('last_name')}">Last Name
+                                :classes="{'invalid': form.errors.has('last_name')}">{{ 'profile.last_name' | trans }}
                 </input-field>
             </div>
             <div class="row">

@@ -9,7 +9,7 @@
             </main>
         </template>
         <template v-else-if="error">
-            <h2>Error. Try again later please</h2>
+            <h2>{{ 'main.error' | trans }}</h2>
         </template>
         <template v-else>
             <spinner size="massive"></spinner>

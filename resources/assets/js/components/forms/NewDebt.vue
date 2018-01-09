@@ -1,13 +1,13 @@
 <template>
     <form method="POST" class="col s12" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
-        <h3 class="center-align">Add a new debt</h3>
+        <h3 class="center-align">{{ 'debts.add_debt' | trans }}</h3>
         <div class="row col">
             <input-field inputType="text"
                             name="name"
                             v-model="form.name"
                             :error="form.errors.get('name')"
                             :classes="{'invalid': form.errors.has('name')}"
-                            class="col s12">Name
+                            class="col s12">{{ 'debts.name' | trans }}
             </input-field>
         </div>
         <div class="row">
@@ -16,7 +16,7 @@
                             v-model="form.amount"
                             :error="form.errors.get('amount')"
                             :classes="{'invalid': form.errors.has('amount')}"
-                            class="col s6">Amount
+                            class="col s6">{{ 'debts.amount' | trans }}
             </input-field>
             <div class="input-field col s6">
                 <material-select v-model="form.currency_id">
@@ -24,14 +24,14 @@
                         {{ currency.currency }}
                     </option>
                 </material-select>
-                <label>Currency</label>
+                <label>{{ 'debts.currency' | trans }}</label>
             </div>
         </div>
         <div class="row center">
             <input name="type" type="radio" id="give" value="give" v-model="form.type" />
-            <label for="give">Give</label>
+            <label for="give">{{ 'debts.give' | trans }}</label>
             <input name="type" type="radio" id="take" value="take" v-model="form.type" />
-            <label for="take">Take</label>
+            <label for="take">{{ 'debts.take' | trans }}</label>
         </div>
         <div class="row">
             <input-field inputType="text"
@@ -39,11 +39,11 @@
                             v-model="form.comment"
                             :error="form.errors.get('comment')"
                             :classes="{'invalid': form.errors.has('comment')}"
-                            class="col s12">Comment
+                            class="col s12">{{ 'debts.comment' | trans }}
             </input-field>
         </div>
         <div class="row center-align">
-            <button class="btn waves-effect waves-light" name="submit">Add debt
+            <button class="btn waves-effect waves-light" name="submit">{{ 'debts.add_debt' | trans }}
                 <i class="material-icons right">add</i>
             </button>
         </div>

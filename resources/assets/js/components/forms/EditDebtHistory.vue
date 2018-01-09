@@ -1,27 +1,27 @@
 <template>
     <form method="POST" class="col s12" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
-        <h3 class="center-align">Edit the debt history element</h3>
-        <h4 v-if="name">Name: {{ name }}</h4>
+        <h3 class="center-align">{{ 'debts.edit_debt_history_element' | trans }}</h3>
+        <h4 v-if="name">{{ 'debts.name' | trans }}: {{ name }}</h4>
         <div class="row">
             <div class="input-field col s12">
                 <input type="text" id="amount" name="amount" v-model="form.amount" :class="{'invalid': form.errors.has('amount')}" >
-                <label for="amount" :data-error="form.errors.get('amount')">Amount</label>
+                <label for="amount" :data-error="form.errors.get('amount')">{{ 'debts.amount' | trans}}</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
                 <input type="text" id="comment" name="comment" v-model="form.comment" :class="{'invalid': form.errors.has('comment')}" >
-                <label for="comment" :data-error="form.errors.get('comment')">Comment</label>
+                <label for="comment" :data-error="form.errors.get('comment')">{{ 'debts.comment' | trans}}</label>
             </div>
         </div>
         <div class="row center">
             <input name="type" type="radio" id="give" value="give" v-model="form.type" />
-            <label for="give">Give</label>
+            <label for="give">{{ 'debts.give' | trans }}</label>
             <input name="type" type="radio" id="take" value="take" v-model="form.type" />
-            <label for="take">Take</label>
+            <label for="take">{{ 'debts.take' | trans }}</label>
         </div>
         <div class="row center-align">
-            <button class="btn waves-effect waves-light" name="submit">Edit debt
+            <button class="btn waves-effect waves-light" name="submit">{{ 'debts.edit_debt_history_element' | trans }}
                 <i class="material-icons right">edit</i>
             </button>
         </div>

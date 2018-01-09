@@ -7,7 +7,7 @@
                 <router-link to="/" exact><span class="white-text email">{{ user.email }}</span></router-link>
             </div>
         </li>
-        <li><router-link :to="{name: 'profile'}" class="waves-effect"><i class="material-icons">assignment_ind</i>Профиль</router-link></li>
+        <li><router-link :to="{name: 'profile'}" class="waves-effect"><i class="material-icons">assignment_ind</i>{{ 'profile.profile' | trans }}</router-link></li>
         <li><div class="divider"></div></li>
         <li><a href="" @click.prevent="logout" >{{ 'auth.logout' | trans }}</a></li>
     </div>
