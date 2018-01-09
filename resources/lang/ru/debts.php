@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'add_debt' => 'Add a New Debt',
+    'add_debt' => 'Добавить новый долг',
     'name' => 'Имя',
     'amount' => 'Количество',
     'currency' => 'Валюта',
@@ -10,5 +10,5 @@ return [
     'comment' => 'Комментарий',
     'delete_all' => 'Удалить всё',
     'debt_history' => 'История долга',
-    'edit_debt_history_element' => 'Удалить элемент истории долга',
+    'edit_debt_history_element' => 'Изменить элемент истории долга',
 ];
