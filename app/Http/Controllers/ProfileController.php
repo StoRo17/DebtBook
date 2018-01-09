@@ -14,16 +14,13 @@ class ProfileController extends Controller
         return new ProfileResource($request->user()->profile);
     }
 
-    public function update(ProfileRequest $request, AvatarHandler $avatarHandler, $id)
+    public function update(ProfileRequest $request, $id)
     {
         $user = $request->user();
-
-        $path = $avatarHandler->handleUploadedImage($request, $id);
 
         $user->profile()->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'avatar' => $path
         ]);
 
         return (new ProfileResource($user->profile))

@@ -100,6 +100,7 @@ class LoginController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'User logged in',
+            'user_id' => auth()->id(),
             'tokens' => $tokens
         ]);
     }

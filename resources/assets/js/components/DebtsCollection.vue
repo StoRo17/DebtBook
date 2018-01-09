@@ -1,38 +1,44 @@
 <template>
-    <div class="collection">
-        <debt v-for="debt in debts"
-              :key="debt.name"
-              :name="debt.name"
-              :amount="debt.amount"
-              :currency="debt.currency">
-        </debt>
+    <div>
+        <template v-if="!this.$store.state.debts.loading">
+            <div class="collection">
+                <debt v-for="debt in debts"
+                    :key="debt.id"
+                    :debt="debt">
+                </debt>
+            </div>
+        </template>
+        <template v-else>
+            <spinner size="big"></spinner>
+        </template>
     </div>
 </template>
 
 <script>
-    import Debt from './Debt.vue';
+import { mapGetters } from 'vuex';
+import Spinner from 'vue-simple-spinner';
+import Debt from './Debt.vue';
 
-    export default {
-        components: {
-            'debt': Debt
-        },
+export default {
+    components: {
+        Debt,
+        Spinner
+    },
 
-        data () {
-            return {
-                debts: [
-                    {
-                        'name': 'Никита',
-                        'amount': '100',
-                        'currency': '₽'
-                    },
-                    {
-                        'name': 'Андрей',
-                        'amount': '200',
-                        'currency': '$'
-                    }
-                ]
-            }
+    computed: {
+        ...mapGetters([
+            'debts',
+            'currencies',
+            'isLoggedIn',
+            'userId'
+        ])
+    },
+
+    mounted() {
+        if (this.isLoggedIn) {
+            this.$store.dispatch('loadCurrencies', this.userId);
+            this.$store.dispatch('loadDebts', this.userId);
         }
-
     }
+}
 </script>

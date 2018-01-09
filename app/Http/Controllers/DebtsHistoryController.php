@@ -6,6 +6,7 @@ use App\Debt;
 use App\DebtsHistory;
 use App\Http\Requests\DebtsHistoryRequest;
 use App\Http\Resources\DebtsHistory as DebtsHistoryResource;
+use function foo\func;
 
 class DebtsHistoryController extends Controller
 {
@@ -26,6 +27,11 @@ class DebtsHistoryController extends Controller
         return DebtsHistoryResource::collection($debtHistory);
     }
 
+    public function show($debtId, $debtHistoryId)
+    {
+        return new DebtsHistoryResource($this->debtsHistory->find($debtHistoryId));
+    }
+
     public function create(DebtsHistoryRequest $request, $debtId)
     {
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
@@ -40,14 +46,20 @@ class DebtsHistoryController extends Controller
 
     public function update(DebtsHistoryRequest $request, $debtId, $debtHistoryId)
     {
-        $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
+        $debtHistoryElement = $this->debtsHistory->find($debtHistoryId);
+        $debtHistoryElement->update($request->all());
 
-        $debtHistory = $this->debtsHistory->find($debtHistoryId);
-        $debtHistory->update($request->all());
+        $debtHistoryTotalAmount = $this->debtsHistory->where('debt_id', $debtId)
+            ->get()
+            ->reduce(function ($totalAmount, $item) {
+                $amount = $item->type == 'give' ? $item->amount : -$item->amount;
+                return $totalAmount + $amount;
+            });
 
-        $this->debt->find($debtId)->update(['total_amount' => $totalAmount]);
+        $debt = $this->debt->find($debtId);
+        $debt->update(['total_amount' => $debtHistoryTotalAmount]);
 
-        return new DebtsHistoryResource($debtHistory);
+        return new DebtsHistoryResource($debtHistoryElement);
     }
 
     public function delete($debtId, $debtHistoryId)

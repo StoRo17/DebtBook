@@ -17,20 +17,23 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/users/{id}', 'UserController@show')->name('getUser');
+    Route::put('/users/{id}/change-password', 'UserController@changePassword')->name('changePassword');
+
     Route::get('/users/{id}/profile', 'ProfileController@show')->name('getProfile');
     Route::put('/users/{id}/profile', 'ProfileController@update')->name('updateProfile');
 
-    Route::group(['prefix' => '/users/{userId}'], function () {
-        Route::get('/debts', 'DebtController@index')->name('getDebts');
-        Route::get('/debts/{debtId}', 'DebtController@show')->name('getDebt');
-        Route::post('/debts', 'DebtController@create')->name('createDebt');
-        Route::delete('/debts/{debtId}', 'DebtController@delete')->name('deleteDebt');
+    Route::get('/users/{userId}/debts', 'DebtController@index')->name('getDebts');
+    Route::get('/debts/{debtId}', 'DebtController@show')->name('getDebt');
+    Route::post('/debts', 'DebtController@create')->name('createDebt');
+    Route::delete('/debts/{debtId}', 'DebtController@delete')->name('deleteDebt');
 
-        Route::get('/debts/{debtId}/history', 'DebtsHistoryController@index')->name('getDebtHistory');
-        Route::post('/debts/{debtId}/history', 'DebtsHistoryController@create')->name('createDebtHistory');
-        Route::put('/debts/{debtId}/history/{debtHistoryId}', 'DebtsHistoryController@update')
-            ->name('updateDebtHistory');
-        Route::delete('/debts/{debtId}/history/{debtHistoryId}', 'DebtsHistoryController@delete')
-            ->name('deleteDebtHistory');
-    });
+    Route::get('/debts/{debtId}/history', 'DebtsHistoryController@index')->name('getDebtHistory');
+    Route::get('/debts/{debtId}/history/{debtHistoryId}', 'DebtsHistoryController@show')->name('showDebtHistory');
+    Route::post('/debts/{debtId}/history', 'DebtsHistoryController@create')->name('createDebtHistory');
+    Route::put('/debts/{debtId}/history/{debtHistoryId}', 'DebtsHistoryController@update')
+        ->name('updateDebtHistory');
+    Route::delete('/debts/{debtId}/history/{debtHistoryId}', 'DebtsHistoryController@delete')
+        ->name('deleteDebtHistory');
+
+    Route::get('/currencies', 'CurrencyController@index')->name('getCurrencies');
 });

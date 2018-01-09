@@ -17,7 +17,7 @@ class DebtController extends Controller
 
     public function index($userId)
     {
-        $debts = $this->debt->where('user_id', $userId)->get();
+        $debts = $this->debt->where('user_id', $userId)->orderBy('name', 'asc')->get();
 
         return DebtResource::collection($debts);
     }
@@ -27,7 +27,7 @@ class DebtController extends Controller
         return new DebtResource($this->debt->find($debtId));
     }
 
-    public function create(DebtCreationRequest $request, $userId)
+    public function create(DebtCreationRequest $request)
     {
         $totalAmount = $request->type == 'give' ? $request->amount : -$request->amount;
 
@@ -42,7 +42,7 @@ class DebtController extends Controller
         return new DebtResource($debt);
     }
 
-    public function delete($userId, $debtId)
+    public function delete($debtId)
     {
         $debt = $this->debt->find($debtId);
         $debt->delete();
