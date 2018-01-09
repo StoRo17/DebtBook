@@ -16,6 +16,7 @@ return [
     'sign_up' => 'Регистрация',
     'logout' => 'Выйти',
     'password' => 'Пароль',
+    'new_password' => 'Новый пароль',
     'password_confirmation' => 'Подтверждение пароля',
     'change_password' => 'Сменить пароль',
     'submit' => 'Отправить',

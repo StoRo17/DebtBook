@@ -16,6 +16,7 @@ return [
     'sign_up' => 'Sing Up',
     'logout' => 'Logout',
     'password' => 'Password',
+    'new_password' => 'New password',
     'password_confirmation' => 'Password confirmation',
     'change_password' => 'Change password',
     'submit' => 'Submit',

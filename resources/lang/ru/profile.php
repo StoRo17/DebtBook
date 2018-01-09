@@ -6,4 +6,6 @@ return [
     'profile' => 'Профиль',
     'change_data' => 'Изменить Данные',
     'edit_profile' => 'Изменить профиль',
+    'change_password' => 'Изменить пароль',
+    
 ];
