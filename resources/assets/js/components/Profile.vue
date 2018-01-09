@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="right-align hide-on-med-and-down">
                         <router-link :to="{name: 'editProfile'}" class="waves-light btn">{{ 'profile.change_data' | trans }}</router-link>
-                        <a href="" class="waves-light btn">{{ 'auth.change_password' | trans }}</a>
+                        <router-link :to="{name: 'changePassword'}" class="waves-light btn">{{ 'auth.change_password' | trans }}</router-link>
                         <a href="" @click.prevent="logout" class="waves-light btn">{{ 'auth.logout' | trans }}</a>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         <router-link :to="{name: 'editProfile'}" class="waves-light btn">{{ 'profile.change_data' | trans }}</router-link>
                     </div>
                     <div class="row">
-                        <a href="" class="waves-light btn">{{ 'auth.change_password' | trans }}</a>
+                        <router-link :to="{name: 'changePassword'}" class="waves-light btn">{{ 'auth.change_password' | trans }}</router-link>
                     </div>
                     <div class="row">
                     </div>
