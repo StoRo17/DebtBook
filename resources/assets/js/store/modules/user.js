@@ -31,6 +31,18 @@ const actions = {
                 commit(types.ERROR);
                 commit(types.LOADING_STOP);
             });
+    },
+
+    changePassword({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            api.changePassword(payload.userId, payload.data)
+                .then(response => {
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
     }
 }
 

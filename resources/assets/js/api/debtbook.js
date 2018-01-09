@@ -19,6 +19,10 @@ export default {
         return get(USERS_PATH + userId);
     },
 
+    changePassword(userId, data) {
+        return put(USERS_PATH + userId + '/change-password', data);
+    },
+
     getProfile(userId) {
         return get(USERS_PATH + userId + '/profile');
     },
