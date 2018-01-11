@@ -32,7 +32,8 @@ class RegisterController extends Controller
         return User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'email_token' => base64_encode($data['email'])
+            // for Heroku demo
+//            'email_token' => base64_encode($data['email'])
         ]);
     }
 
@@ -48,7 +49,8 @@ class RegisterController extends Controller
         $user->profile()->create($request->only(['first_name', 'last_name']));
 
         event(new Registered($user));
-        dispatch(new SendVerificationEmail($user));
+        // for Heroku demo
+//        dispatch(new SendVerificationEmail($user));
 
         return response()->json([
             'success' => true,

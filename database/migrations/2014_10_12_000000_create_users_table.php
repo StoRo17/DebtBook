@@ -17,7 +17,9 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('verified')->default(false);
+//            $table->boolean('verified')->default(false);
+            // for Heroku demo
+            $table->boolean('verified')->default(true);
             $table->string('email_token')->nullable();
             $table->rememberToken();
             $table->timestamps();

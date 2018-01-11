@@ -78,7 +78,9 @@
                 api.register(this.form.data())
                     .then(response => {
                         this.form.onSuccess();
-                        this.$router.push({name: 'verification'});
+                        // this.$router.push({name: 'verification'});
+                        // for Heroku demo
+                        this.$router.push({name: 'login'});
                     })
                     .catch(error => {
                         this.form.onFail(error);

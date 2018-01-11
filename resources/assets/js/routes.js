@@ -8,8 +8,8 @@ import DebtHistoryComponent from "./components/DebtHistory.vue";
 import EditDebtHistoryComponent from "./components/forms/EditDebtHistory.vue";
 import RegisterForm from './components/forms/Register.vue';
 import LoginForm from './components/forms/Login.vue';
-import VerificationComponent from './components/Verification.vue';
-import VerifyEmailComponent from './components/VerifyEmail.vue';
+// import VerificationComponent from './components/Verification.vue';
+// import VerifyEmailComponent from './components/VerifyEmail.vue';
 import NotFoundComponent from './components/NotFound.vue';
 
 let routes = [
@@ -64,23 +64,23 @@ let routes = [
         name: 'login',
         component: LoginForm
     },
-    {
-        path: '/verification',
-        name: 'verification',
-        component: VerificationComponent,
-        beforeEnter: (to, from, next) => {
-            if (from.name != 'register') {
-                next({name: 'main'});
-            } else {
-                next();
-            }
-        }
-    },
-    {
-        path: '/verify-email/:email_token',
-        name: 'verifyEmail',
-        component: VerifyEmailComponent
-    },
+    // {
+    //     path: '/verification',
+    //     name: 'verification',
+    //     component: VerificationComponent,
+    //     beforeEnter: (to, from, next) => {
+    //         if (from.name != 'register') {
+    //             next({name: 'main'});
+    //         } else {
+    //             next();
+    //         }
+    //     }
+    // },
+    // {
+    //     path: '/verify-email/:email_token',
+    //     name: 'verifyEmail',
+    //     component: VerifyEmailComponent
+    // },
     {
         path: '*',
         component: NotFoundComponent
