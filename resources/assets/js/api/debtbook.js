@@ -2,9 +2,11 @@ import axios from 'axios';
 
 
 const PREFIX = '/api';
-const USERS_PATH = PREFIX + '/users/';
-const DEBTS_PATH = '/debts/';
-const DEBTS_HISTORY_PATH = '/history/';
+const USERS_PATH = PREFIX + '/users';
+const PROFILE_PATH = '/profile';
+const DEBTS_PATH = '/debts';
+const DEBTS_HISTORY_PATH = '/history';
+const SR = '/';
 
 export default {
     login(data) {
@@ -16,39 +18,39 @@ export default {
     },
 
     getUser(userId) {
-        return get(USERS_PATH + userId);
+        return get(USERS_PATH + SR + userId);
     },
 
     changePassword(userId, data) {
-        return put(USERS_PATH + userId + '/change-password', data);
+        return put(USERS_PATH + SR + userId + '/change-password', data);
     },
 
     getProfile(userId) {
-        return get(USERS_PATH + userId + '/profile');
+        return get(USERS_PATH + SR + userId + PROFILE_PATH);
     },
 
     editProfile(userId, data) {
-        return put(USERS_PATH + userId + '/profile', data);
+        return put(USERS_PATH + SR + userId + PROFILE_PATH, data);
     },
 
     getDebts(userId) {
-        return get(USERS_PATH + userId + DEBTS_PATH);
+        return get(USERS_PATH + SR + userId + DEBTS_PATH);
     },
 
     getDebt(debtId) {
-        return get(PREFIX + DEBTS_PATH + debtId);
+        return get(PREFIX + DEBTS_PATH + SR + debtId);
     },
 
     getDebtHistory(debtId) {
-        return get(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH);
+        return get(PREFIX + DEBTS_PATH + SR + debtId + DEBTS_HISTORY_PATH);
     },
 
     getDebtHistoryElement(debtId, debtHistoryElementId) {
-        return get(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH + debtHistoryElementId);
+        return get(PREFIX + DEBTS_PATH + SR + debtId + DEBTS_HISTORY_PATH + SR + debtHistoryElementId);
     },
 
     updateDebtHistoryElement(debtId, debtHistoryElementId, data) {
-        return put(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH + debtHistoryElementId, data);        
+        return put(PREFIX + DEBTS_PATH + SR + debtId + DEBTS_HISTORY_PATH + SR + debtHistoryElementId, data);
     },
 
     createDebt(data) {
@@ -56,15 +58,15 @@ export default {
     },
 
     createDebtHistory(debtId, data) {
-        return post(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH, data);
+        return post(PREFIX + DEBTS_PATH + SR + debtId + DEBTS_HISTORY_PATH, data);
     },
 
     deleteDebt(debtId) {
-        return del(PREFIX + DEBTS_PATH + debtId);
+        return del(PREFIX + DEBTS_PATH + SR + debtId);
     },
 
     deleteDebtHistory(debtId, debtHistoryId) {
-        return del(PREFIX + DEBTS_PATH + debtId + DEBTS_HISTORY_PATH + debtHistoryId);
+        return del(PREFIX + DEBTS_PATH + SR + debtId + DEBTS_HISTORY_PATH + SR + debtHistoryId);
     },
 
     getCurrencies() {
@@ -103,5 +105,3 @@ function request(requestType, url, data = []) {
             });
     })
 }
-
-
