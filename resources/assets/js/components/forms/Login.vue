@@ -51,8 +51,8 @@
                 this.$store.dispatch('login', this.form.data())
                     .then(() => {
                         this.form.onSuccess();
+                        this.$router.push({name: 'main'});
                         location.reload();
-                        this.$router.push({name: 'main'})
                     })
                     .catch(error => {
                         this.form.onFail(error);
