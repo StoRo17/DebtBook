@@ -27,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
             $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
+
+        if ($this->app->environment() == 'production') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 }
